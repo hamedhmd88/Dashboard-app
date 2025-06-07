@@ -1,0 +1,211 @@
+{
+  "sales": [
+    { "name": "ژانویه", "sales": 4200 },
+    { "name": "فوریه", "sales": 3800 },
+    { "name": "مارس", "sales": 5100 },
+    { "name": "آوریل", "sales": 4600 },
+    { "name": "مه", "sales": 5400 },
+    { "name": "ژوئن", "sales": 7200 },
+    { "name": "جولای", "sales": 6100 },
+    { "name": "اوت", "sales": 2900 },
+    { "name": "سپتامبر", "sales": 6800 },
+    { "name": "اکتبر", "sales": 6300 },
+    { "name": "نوامبر", "sales": 7100 },
+    { "name": "دسامبر", "sales": 7500 }
+  ],
+  "categories": [
+    { "name": "گوشی هوشمند", "value": 5200 },
+    { "name": "لپ‌تاپ", "value": 4300 },
+    { "name": "مبلمان", "value": 3100 },
+    { "name": "زیبایی و مراقبت شخصی", "value": 2700 },
+    { "name": "لوازم جانبی بازی", "value": 2200 }
+  ],
+  "orderStatus": [
+    { "name": "در انتظار", "value": 60 },
+    { "name": "در حال پردازش", "value": 45 },
+    { "name": "لغو شده", "value": 30 },
+    { "name": "تحویل داده شده", "value": 120 }
+  ],
+  "productPerformance": [
+    {
+      "name": "گوشی هوشمند",
+      "Retention": 5200,
+      "Revenue": 3100,
+      "Profit": 2800
+    },
+    { "name": "لپ‌تاپ", "Retention": 4300, "Revenue": 2700, "Profit": 3400 },
+    {
+      "name": "میز قهوه‌خوری",
+      "Retention": 3100,
+      "Revenue": 6900,
+      "Profit": 4100
+    },
+    { "name": "ماوس", "Retention": 2500, "Revenue": 4200, "Profit": 2700 },
+    {
+      "name": "کفش ورزشی",
+      "Retention": 2000,
+      "Revenue": 9000,
+      "Profit": 2900
+    }
+  ],
+  "orders": [
+    {
+      "id": "#A7B9D31",
+      "client": "اتان کارتر",
+      "email": "Ethan.Carter@example.com",
+      "total": 174.5,
+      "status": "تحویل داده شده",
+      "date": "۳۰ ژانویه ۲۰۲۵",
+      "country": "ایالات متحده آمریکا"
+    },
+    {
+      "id": "#X4Y2Z85",
+      "client": "سوفیا میچل",
+      "email": "Sophia.Mitchell@example.co.uk",
+      "total": 632.0,
+      "status": "در انتظار",
+      "date": "۲۳ فوریه ۲۰۲۵",
+      "country": "بریتانیا"
+    },
+    {
+      "id": "#M6N3P74",
+      "client": "لیام هریسون",
+      "email": "Liam.Harrison@example.de",
+      "total": 202.5,
+      "status": "تحویل داده شده",
+      "date": "۲۵ دسامبر ۲۰۲۴",
+      "country": "آلمان"
+    },
+    {
+      "id": "#K9L8T62",
+      "client": "آوا بنت",
+      "email": "Ava.Bennett@example.in",
+      "total": 330.0,
+      "status": "لغو شده",
+      "date": "۲۲ مارس ۲۰۲۵",
+      "country": "هند"
+    },
+    {
+      "id": "#Q5R7W30",
+      "client": "نوآ رینولدز",
+      "email": "Noah.Reynolds@example.au",
+      "total": 595.5,
+      "status": "تحویل داده شده",
+      "date": "۵ مارس ۲۰۲۵",
+      "country": "استرالیا"
+    }
+  ],
+  "orderStats": [
+    { "name": "کل سفارشات", "value": "۱۵٬۲۴۰", "icon": "ShoppingBag" },
+    { "name": "سفارشات تکمیل شده", "value": "۱۳٬۵۰۰", "icon": "CheckCircle" },
+    { "name": "سفارشات در انتظار", "value": "۱٬۱۲۰", "icon": "Clock" },
+    { "name": "سفارشات لغو شده", "value": "۶۲۰", "icon": "Ban" }
+  ],
+  "products": [
+    {
+      "id": "#A7F3D67",
+      "name": "گوشی هوشمند",
+      "category": "الکترونیک",
+      "price": 699.99,
+      "stock": 120,
+      "sales": 5200,
+      "image": "/images/phone.jpg"
+    },
+    {
+      "id": "#B6E4F24",
+      "name": "لپ‌تاپ",
+      "category": "الکترونیک",
+      "price": 1299.99,
+      "stock": 75,
+      "sales": 4300,
+      "image": "/images/laptop.jpg"
+    },
+    {
+      "id": "#C5D2A89",
+      "name": "میز قهوه‌خوری",
+      "category": "خانه",
+      "price": 249.99,
+      "stock": 95,
+      "sales": 3100,
+      "image": "/images/table.jpg"
+    },
+    {
+      "id": "#D4B7C34",
+      "name": "ماوس",
+      "category": "الکترونیک",
+      "price": 49.99,
+      "stock": 180,
+      "sales": 2500,
+      "image": "/images/mouse.jpg"
+    },
+    {
+      "id": "#E3A5623",
+      "name": "کفش ورزشی",
+      "category": "ورزشی",
+      "price": 119.99,
+      "stock": 200,
+      "sales": 2000,
+      "image": "/images/shoes.jpg"
+    }
+  ],
+  "salesByCategory": [
+    { "name": "الکترونیک", "value": 400 },
+    { "name": "پوشاک", "value": 300 },
+    { "name": "خانه و باغ", "value": 200 },
+    { "name": "کتاب", "value": 100 },
+    { "name": "سایر", "value": 150 }
+  ],
+  "clients": [
+    {
+      "id": 1,
+      "name": "اتان کارتر",
+      "email": "Ethan.Carter@example.com",
+      "phoneNumber": "+1 415-678-9023",
+      "country": "ایالات متحده آمریکا",
+      "image": "/images/user1.jpg"
+    },
+    {
+      "id": 2,
+      "name": "سوفیا میچل",
+      "email": "Sophia.Mitchell@example.com",
+      "phoneNumber": "+44 7911 123456",
+      "country": "بریتانیا",
+      "image": "/images/user2.jpg"
+    },
+    {
+      "id": 3,
+      "name": "لیام هریسون",
+      "email": "Liam.Harrison@example.com",
+      "phoneNumber": "+49 1523 4567890",
+      "country": "آلمان",
+      "image": "/images/user3.jpg"
+    },
+    {
+      "id": 4,
+      "name": "آوا بنت",
+      "email": "Ava.Bennett@example.com",
+      "phoneNumber": "+91 98765 43210",
+      "country": "هند",
+      "image": "/images/user4.jpg"
+    },
+    {
+      "id": 5,
+      "name": "نوآ رینولدز",
+      "email": "Noah.Reynolds@example.com",
+      "phoneNumber": "+61 412 345 678",
+      "country": "استرالیا",
+      "image": "/images/user5.jpg"
+    }
+  ],
+  "sidebarItems": [
+    { "name": "داشبورد", "icon": "House", "href": "/" },
+    { "name": "محصولات", "icon": "ShoppingBag", "href": "/products" },
+    { "name": "مشتریان", "icon": "Users", "href": "/users" },
+    { "name": "فروش", "icon": "DollarSign", "href": "/sales" },
+    { "name": "سفارشات", "icon": "ShoppingCart", "href": "/orders" },
+    { "name": "تنظیمات", "icon": "Settings", "href": "" },
+    { "name": "پیام‌ها", "icon": "Mail", "href": "" },
+    { "name": "اعلان‌ها", "icon": "Bell", "href": "" },
+    { "name": "راهنما", "icon": "Info", "href": "" }
+  ]
+}
