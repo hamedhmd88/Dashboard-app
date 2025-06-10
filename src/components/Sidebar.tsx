@@ -44,10 +44,10 @@ function Sidebar() {
         isSidebarOpen ? "w-64" : "w-20"
       }`}
     >
-      <div className="h-full bg-[#1e1e1e] backdrop-blur-md p-4 flex flex-col border-l border-[#2f2f2f]">
+      <div className="h-full bg-[#0A0A0A] backdrop-blur-md p-4 flex flex-col border-l border-[#2f2f2f]">
         <button
           onClick={() => setIssidebarOpen(!isSidebarOpen)}
-          className=" p-2 rounded-full hover:bg-[#2f2f2f] transition-all max-w-fit cursor-pointer"
+          className=" p-2 rounded-full hover:bg-[#1F1F1F] transition-all max-w-fit cursor-pointer"
         >
           <Menu size={24} />
         </button>
@@ -60,8 +60,8 @@ function Sidebar() {
             return (
               <Link key={name} href={href}>
                 <div
-                  className={`flex items-center p-4 text-sm font-medium rounded-lg hover:bg-[#2f2f2f] transition-all mb-2 ${
-                    pathname === item.href ? "bg-[#2f2f2f]" : ""
+                  className={`flex items-center p-4 text-sm font-medium rounded-lg hover:bg-[#1F1F1F] transition-all mb-2 ${
+                    pathname === item.href ? "bg-[#1F1F1F]" : ""
                   }`}
                 >
                   {IconComponent && (

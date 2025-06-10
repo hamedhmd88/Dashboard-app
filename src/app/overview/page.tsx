@@ -5,6 +5,7 @@ import { DollarSign, ShoppingBag, SquareActivity, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import SalesOverviewChart from "@/components/SalesOverviewChart";
 import CategoryChart from "@/components/CategoryChart";
+import OrderChart from "@/components/OrderChart";
 function OverviewPage() {
   return (
     <div className="flex-1 overflow-auto relative z-10">
@@ -23,6 +24,7 @@ function OverviewPage() {
         <div className=" grid grid-cols-1 lg:grid-cols-2 gap-8">
             <SalesOverviewChart/>
             <CategoryChart/>
+            <OrderChart/>
         </div>
       </main>
     </div>

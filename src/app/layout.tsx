@@ -28,6 +28,7 @@ export default function RootLayout({
     <html lang="fa" dir="rtl">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning={true}
       >
         <div className=" flex h-screen overflow-hidden">
           <Sidebar />
