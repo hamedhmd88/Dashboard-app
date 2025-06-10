@@ -9,6 +9,7 @@ import {
   Tooltip,
   Line,
 } from "recharts";
+import { motion } from "framer-motion";
 
 const SalesOverviewChart = () => {
   const [salesData, setSalesData] = useState<Sale[]>([]);
@@ -20,7 +21,12 @@ const SalesOverviewChart = () => {
   }, []);
 
   return (
-    <div className="bg-[#1e1e1e] backdrop-blur-md shadow-lg rounded-xl p-4 md:p-6 border border-[#1f1f1f] mx-2 md:mx-0">
+    <motion.div
+      className="bg-[#1e1e1e] backdrop-blur-md shadow-lg rounded-xl p-4 md:p-6 border border-[#1f1f1f] mx-2 md:mx-0"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2, duration: 0.5 }}
+    >
       <h2 className="text-base md:text-2xl font-medium mb-4 text-gray-100 text-center md:text-right">
         نمای کلی فروش
       </h2>
@@ -48,13 +54,13 @@ const SalesOverviewChart = () => {
               dataKey="sales"
               stroke="#9c27b0"
               strokeWidth={3}
-              dot={{fill: "#9c27b0", strokeWidth: 2, r: 4}}
-              activeDot={{r: 6, strokeWidth: 2}}
+              dot={{ fill: "#9c27b0", strokeWidth: 2, r: 4 }}
+              activeDot={{ r: 6, strokeWidth: 2 }}
             />
           </LineChart>
         </ResponsiveContainer>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
