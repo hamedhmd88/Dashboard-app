@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import SalesOverviewChart from "@/components/SalesOverviewChart";
 import CategoryChart from "@/components/CategoryChart";
 import OrderChart from "@/components/OrderChart";
+import ProductChart from "@/components/ProductChart";
 function OverviewPage() {
   return (
     <div className="flex-1 overflow-auto relative z-10">
@@ -25,6 +26,7 @@ function OverviewPage() {
             <SalesOverviewChart/>
             <CategoryChart/>
             <OrderChart/>
+            <ProductChart/>
         </div>
       </main>
     </div>

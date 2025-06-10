@@ -40,7 +40,15 @@ const SalesOverviewChart = () => {
               tick={{ fontSize: 12 }}
               interval={0}
             />
-            <YAxis stroke="#9ca3af" tick={{ fontSize: 12 }} width={40} />
+            <YAxis
+              stroke="#9ca3af"
+              tick={{
+                fontSize: 12,
+                dx: -25, // <--- اینجا برای جابجایی به سمت چپ
+                fill: "#9ca3af", // رنگ متن تیک‌ها
+              }}
+              width={40} // این width فضای اشغال شده توسط محور را مشخص می‌کند
+            />{" "}
             <Tooltip
               contentStyle={{
                 backgroundColor: "rgba(31, 41, 55, 0.8)",
