@@ -41,7 +41,7 @@ function Sidebar() {
   return (
     <div
       className={`relative z-10 transition-all duration-300 ease-in-out flex-shrink-0 ${
-        isSidebarOpen ? "w-64" : "w-20"
+        isSidebarOpen ? "w-64" : "w-28"
       }`}
     >
       <div className="h-full bg-[#0A0A0A] backdrop-blur-md p-4 flex flex-col border-l border-[#2f2f2f]">

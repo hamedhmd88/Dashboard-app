@@ -146,6 +146,24 @@
       "stock": 200,
       "sales": 2000,
       "image": "/images/shoes.jpg"
+    },
+    {
+      "id": "#D4B8C34",
+      "name": "ماوس",
+      "category": "الکترونیک",
+      "price": 49.99,
+      "stock": 180,
+      "sales": 2500,
+      "image": "/images/mouse.jpg"
+    },
+    {
+      "id": "#E3A5023",
+      "name": "کفش ورزشی",
+      "category": "ورزشی",
+      "price": 119.99,
+      "stock": 200,
+      "sales": 2000,
+      "image": "/images/shoes.jpg"
     }
   ],
   "salesByCategory": [
