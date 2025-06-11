@@ -69,7 +69,7 @@ function Sidebar() {
                   )}
                   {isSidebarOpen && (
                     <span
-                      className={`mr-4 lg:font-bold lg:text-lg whitespace-nowrap transition-all duration-500 ease-in-out \
+                      className={`mr-4 lg:font-medium lg:text-lg whitespace-nowrap transition-all duration-500 ease-in-out \
                         ${
                           isSidebarOpen
                             ? "opacity-100 translate-x-0"

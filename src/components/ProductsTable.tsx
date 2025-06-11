@@ -22,34 +22,43 @@ const ProductsTable = () => {
       .then((data) => setProducts(data.products));
   }, []);
 
+  // محاسبه محصولات فیلتر شده براساس عبارت جستجو و دسته‌بندی انتخاب شده
   const filteredProducts = useMemo(() => {
+    // حذف فاصله‌های اضافی و تبدیل به حروف کوچک برای تطبیق بهتر جستجو
     const trimmedSearch = searchTerm.trim().toLowerCase();
     const trimmedCategory = category.trim();
 
+    // فیلتر کردن محصولات
     return products.filter((product) => {
+      // بررسی اینکه آیا نام یا دسته‌ی محصول با عبارت جستجو مطابقت دارد
       const matchesSearch =
-        !trimmedSearch ||
-        product.name?.toLowerCase().includes(trimmedSearch) ||
-        product.category?.toLowerCase().includes(trimmedSearch);
+        !trimmedSearch || // اگر چیزی برای جستجو وارد نشده، همه نتایج را نشان بده
+        product.name?.toLowerCase().includes(trimmedSearch) || // تطبیق با نام محصول
+        product.category?.toLowerCase().includes(trimmedSearch); // یا تطبیق با دسته‌بندی
 
+      // بررسی اینکه آیا دسته‌بندی انتخاب شده با دسته‌ی محصول یکی است
       const matchesCategory =
         !trimmedCategory || product.category === trimmedCategory;
 
+      // فقط محصولاتی که هم با جستجو و هم با دسته مطابقت دارند، نگه‌دار
       return matchesSearch && matchesCategory;
     });
-  }, [products, searchTerm, category]);
+  }, [products, searchTerm, category]); // فقط وقتی این مقادیر تغییر کنند، محاسبه مجدد انجام می‌شود
 
+  // محاسبه تعداد کل صفحات براساس تعداد محصولات فیلتر شده و تعداد آیتم‌ها در هر صفحه
   const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
 
+  // گرفتن فقط محصولات صفحه‌ی فعلی از میان لیست فیلتر شده
   const paginatedProducts = useMemo(() => {
-    const start = (currentPage - 1) * ITEMS_PER_PAGE;
-    const end = start + ITEMS_PER_PAGE;
-    return filteredProducts.slice(start, end);
-  }, [filteredProducts, currentPage]);
+    const start = (currentPage - 1) * ITEMS_PER_PAGE; // محاسبه ایندکس شروع
+    const end = start + ITEMS_PER_PAGE; // محاسبه ایندکس پایان (غیرشامل)
+    return filteredProducts.slice(start, end); // استخراج محصولات مربوط به صفحه فعلی
+  }, [filteredProducts, currentPage]); // فقط زمانی که لیست یا صفحه تغییر کند، محاسبه مجدد انجام می‌شود
 
+  // تابع تغییر صفحه: اگر شماره صفحه معتبر باشد، صفحه را به‌روزرسانی می‌کند
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
+      setCurrentPage(page); // تنظیم صفحه‌ی جدید
     }
   };
 
@@ -61,7 +70,7 @@ const ProductsTable = () => {
       transition={{ delay: 0.2, duration: 0.5 }}
     >
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4 md:gap-0">
-        <h2 className="text-lg md:text-xl font-semibold text-gray-100 text-center md:text-right">
+        <h2 className="text-lg md:text-xl font-semibold text-gray-300 text-center md:text-right">
           لیست محصولات
         </h2>
       </div>
@@ -86,7 +95,7 @@ const ProductsTable = () => {
         />
       </div>
 
-      <div className="overflow-x-auto mt-4" dir="rtl">
+      <div className=" mt-4 overflow-clip">
         <table className="min-w-full divide-y divide-gray-700">
           <thead>
             <tr>
@@ -108,14 +117,14 @@ const ProductsTable = () => {
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-700">
+          <tbody className="divide-y divide-gray-500">
             {paginatedProducts.map((product) => (
               <motion.tr
                 key={product.id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1, duration: 0.3 }}
-                className="flex flex-col md:table-row mb-4 md:mb-0 border-b md:border-b-0 border-gray-700 md:border-none p-2 md:p-0"
+                className="flex flex-col md:table-row mb-4 md:mb-0 border-b md:border-b-0 border-gray-700 md:border-none p-2 md:p-0 "
               >
                 <td className="md:hidden px-3 py-2">
                   <div className="flex items-center justify-between">
@@ -128,10 +137,10 @@ const ProductsTable = () => {
                         className="w-9 h-9 rounded-full"
                       />
                       <div className="mr-3">
-                        <div className="text-base font-medium text-gray-100 text-right">
+                        <div className="text-base font-medium text-gray-300 text-right">
                           {product.name}
                         </div>
-                        <div className="text-base text-gray-400 text-right">
+                        <div className="text-base text-gray-300 text-right">
                           شناسه: {product.id}
                         </div>
                       </div>
@@ -159,7 +168,7 @@ const ProductsTable = () => {
                     ))}
                   </div>
                 </td>
-                <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base font-medium text-gray-100">
+                <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base font-medium text-gray-300">
                   <div className="flex items-center justify-start">
                     <Image
                       src={product.image || "/fallback.png"}

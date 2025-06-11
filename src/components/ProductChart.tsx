@@ -47,7 +47,7 @@ const ProductPerformanceChart = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4, duration: 0.5 }}
     >
-      <h2 className="text-base md:text-xl font-semibold text-gray-100 mb-4 text-center md:text-right">
+      <h2 className="text-base md:text-xl font-semibold text-gray-300 mb-4 text-center md:text-right">
         وضعیت محصولات
       </h2>
       <div className="w-full h-64 md:h-72">

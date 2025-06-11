@@ -1,6 +1,5 @@
 @import "tailwindcss";
-
-
+@import url('https://cdn.fontcdn.ir/Fonts/Vazirmatn/Vazirmatn.css');
 
 :root {
   --background-light: #ffffff;
@@ -26,6 +25,10 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Vazirmatn', Tahoma, Arial, sans-serif;
   direction: rtl;
+}
+
+body, * {
+  font-family: 'Vazirmatn', Tahoma, Arial, sans-serif;
 }

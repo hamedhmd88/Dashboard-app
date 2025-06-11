@@ -7,7 +7,7 @@ function Header() {
     <>
       <header className=" bg-[#0A0A0A] shadow-lg border-[#1f1f1f] mx-4 sm:mx-6 lg:mx-8 mt-4 mb-2 rounded-lg">
         <div className=" max-w-7xl mx-auto py-4 px-4 sm:px-6 flex justify-between items-center">
-          <h1 className=" text-lg sm:text-xl lg:text-2xl font-semibold text-gray-100">
+          <h1 className=" text-lg sm:text-xl lg:text-2xl font-semibold text-gray-300">
             داشبورد
           </h1>
           <div className=" flex items-center space-x-3 sm:space-x-6">

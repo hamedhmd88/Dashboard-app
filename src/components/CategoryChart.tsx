@@ -103,7 +103,7 @@ const CategoryChart = () => {
       // اضافه کردن dir="rtl" و text-right برای پشتیبانی کامل RTL
       className="bg-[#0A0A0A] backdrop-blur-md shadow-lg rounded-xl p-4 md:p-6 border border-[#1f1f1f] mx-2 md:mx-0 text-right"
     >
-      <h2 className="text-base md:text-lg font-medium mb-4 text-gray-100 text-center md:text-right">
+      <h2 className="text-base md:text-lg font-medium mb-4 text-gray-300 text-center md:text-right">
         دسته بندی محصولات{" "}
       </h2>
       <div className="h-64 md:h-80">
