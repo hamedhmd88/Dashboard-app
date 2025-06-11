@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Edit, Trash2 } from "lucide-react";
+import { Edit, Save, Trash2 } from "lucide-react";
 import { Product } from "../../public/data/dataTypes";
 import Image from "next/image";
 import ProductSearchInput from "./ProductSearchInput";
@@ -12,6 +12,7 @@ const ITEMS_PER_PAGE = 4;
 
 const ProductsTable = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [editingRow, setEditingRow] = useState<number | string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -22,6 +23,43 @@ const ProductsTable = () => {
       .then((data) => setProducts(data.products));
   }, []);
 
+  // تابعی برای شروع ویرایش یک ردیف خاص در جدول
+  const handleEditClick = (id: number | string): void => {
+    // مقدار شناسه ردیف در حال ویرایش را ذخیره می‌کنیم
+    setEditingRow(id);
+  };
+
+  // تابعی برای پایان عملیات ویرایش
+  const handleSaveClick = (): void => {
+    // مقدار ردیف در حال ویرایش را پاک می‌کنیم (خروج از حالت ویرایش)
+    setEditingRow(null);
+  };
+
+  // تابعی برای کنترل تغییر مقدار فیلدهای قابل ویرایش در یک ردیف خاص
+  const handleChange = (
+    id: number | string, // شناسه‌ی محصول موردنظر
+    field: keyof Product, // فیلدی که کاربر مقدار آن را تغییر داده
+    value: string // مقدار جدید که وارد شده (به صورت رشته)
+  ): void => {
+    // اگر مقدار فقط شامل عدد یا اعشار نباشد، تابع را متوقف کن
+    if (!/^\d*\.?\d*$/.test(value)) return;
+
+    // بروزرسانی لیست محصولات با مقدار جدید
+    setProducts((prevProducts) =>
+      prevProducts.map(
+        (product) =>
+          // فقط اگر id محصول مطابق باشد، مقدار جدید را ست کن
+          product.id === id
+            ? {
+                ...product, // حفظ سایر مقادیر محصول
+                [field]: Number(value), // مقدار جدید برای فیلد مشخص‌شده
+              }
+            : product // در غیر اینصورت، محصول را بدون تغییر برگردان
+      )
+    );
+  };
+  //////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////
   // محاسبه محصولات فیلتر شده براساس عبارت جستجو و دسته‌بندی انتخاب شده
   const filteredProducts = useMemo(() => {
     // حذف فاصله‌های اضافی و تبدیل به حروف کوچک برای تطبیق بهتر جستجو
@@ -75,21 +113,26 @@ const ProductsTable = () => {
         </h2>
       </div>
 
-      <div
-        className="flex flex-col md:flex-row items-center justify-between gap-4"
-        dir="rtl"
-      >
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+        // کامپوننت مربوط به جستجوی محصولات براساس نام یا شناسه
         <ProductSearchInput
           value={searchTerm}
           onChange={(val) => {
+            // ذخیره مقدار جستجوی جدید در state
             setSearchTerm(val);
+            // برگرداندن به صفحه اول: برای جلوگیری از نمایش نتایج خالی در صفحات بالا
+            // و همچنین بهبود تجربه کاربری (نمایش نتایج از ابتدا)
             setCurrentPage(1);
           }}
         />
+        // فیلتر محصولات براساس دسته‌بندی (مثلاً: الکترونیک، خانه، ورزشی)
         <ProductCategoryFilter
           value={category}
           onChange={(val) => {
+            // ذخیره دسته‌بندی انتخاب‌شده
             setCategory(val);
+            // با هر فیلتر جدید، از صفحه اول نتایج رو شروع کن
+            // چون ممکنه در صفحات بعدی هیچ نتیجه‌ای برای فیلتر انتخابی وجود نداشته باشه
             setCurrentPage(1);
           }}
         />
@@ -124,7 +167,9 @@ const ProductsTable = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1, duration: 0.3 }}
-                className="flex flex-col md:table-row mb-4 md:mb-0 border-b md:border-b-0 border-gray-700 md:border-none p-2 md:p-0 "
+                className={`flex flex-col md:table-row mb-4 md:mb-0 border-b md:border-b-0 border-gray-700 md:border-none p-2 md:p-0  ${
+                  editingRow === product.id ? "bg-[#2f2f2f] ring-gray-500" : ""
+                }`}
               >
                 <td className="md:hidden px-3 py-2">
                   <div className="flex items-center justify-between">
@@ -146,8 +191,21 @@ const ProductsTable = () => {
                       </div>
                     </div>
                     <div className="flex flex-row-reverse space-x-reverse space-x-1 -mt-1 -mr-1">
-                      <button className="text-indigo-500 hover:text-indigo-300">
-                        <Edit size={16} />
+                      <button
+                        className="text-indigo-500 hover:text-indigo-300"
+                        onClick={() =>
+                          editingRow === product.id
+                            ? handleSaveClick()
+                            : product.id !== undefined
+                            ? handleEditClick(product.id)
+                            : undefined
+                        }
+                      >
+                        {editingRow === product.id ? (
+                          <Save size={16} />
+                        ) : (
+                          <Edit size={16} />
+                        )}{" "}
                       </button>
                       <button className="text-red-500 hover:text-red-300">
                         <Trash2 size={16} />
@@ -156,16 +214,51 @@ const ProductsTable = () => {
                   </div>
                   <div className="mt-2 text-base text-gray-300 text-right">
                     <div>دسته‌بندی: {product.category}</div>
-                    {[
-                      { label: "قیمت", value: product.price },
-                      { label: "موجودی", value: product.stock },
-                      { label: "فروش", value: product.sales },
-                    ].map((field) => (
-                      <div key={field.label} className=" text-base">
-                        <span>{field.label}: </span>
-                        <span>{field.value}</span>
-                      </div>
-                    ))}
+                    // پیمایش روی لیستی از برچسب‌های فارسی فیلدهایی که باید
+                    نمایش یا ویرایش داده شوند
+                    {["قیمت", "موجودی", "فروش"].map((label) => {
+                      // نگاشت عنوان فارسی به کلید معادل در شیء محصول (product)
+                      const fieldKey =
+                        label === "قیمت"
+                          ? "price"
+                          : label === "موجودی"
+                          ? "stock"
+                          : "sales";
+
+                      return (
+                        <div key={label} className="text-base">
+                          {/* نمایش عنوان فارسی فیلد */}
+                          <span>{label}: </span>
+
+                          {/* اگر در حالت ویرایش هستیم */}
+                          {editingRow === product.id ? (
+                            <input
+                              type="text"
+                              className="bg-transparent text-white border border-gray-400 w-16 text-center text-xs mx-1"
+                              // مقدار فیلد مربوطه را از شیء محصول نمایش می‌دهد
+                              value={product[fieldKey]}
+                              onChange={(e) => {
+                                // بررسی اینکه product.id تعریف شده باشد (احتیاطی برای جلوگیری از خطا)
+                                if (product.id !== undefined) {
+                                  // فراخوانی تابع تغییر مقدار (آپدیت کردن فیلد در product)
+                                  handleChange(
+                                    product.id,
+                                    fieldKey,
+                                    e.target.value
+                                  );
+                                }
+                              }}
+                            />
+                          ) : label === "قیمت" ? (
+                            // اگر فیلد "قیمت" باشد، مقدار آن را با دو رقم اعشار نمایش بده
+                            ` ${Number(product[fieldKey]).toFixed(2)} `
+                          ) : (
+                            // در غیر این صورت، مقدار فیلد را بدون تغییر نمایش بده
+                            product[fieldKey]
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </td>
                 <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base font-medium text-gray-300">
