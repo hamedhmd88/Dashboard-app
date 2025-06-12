@@ -7,6 +7,8 @@ import Image from "next/image";
 import ProductSearchInput from "./ProductSearchInput";
 import ProductCategoryFilter from "./ProductCategoryFilter";
 import Pagination from "./Pagination";
+import ProductTableRow from "./ProductTableRow";
+import TableHeader from "./TableHeader";
 
 const ITEMS_PER_PAGE = 4;
 
@@ -145,230 +147,19 @@ const ProductsTable = () => {
       <div className=" mt-4 overflow-clip">
         <table className="min-w-full divide-y divide-gray-700">
           <thead>
-            <tr>
-              {[
-                "نام",
-                "شناسه محصول",
-                "دسته‌بندی",
-                "قیمت",
-                "موجودی",
-                "فروش",
-                "عملیات",
-              ].map((header) => (
-                <th
-                  key={header}
-                  className="px-3 md:px-6 py-2 md:py-3 text-right text-md font-medium text-gray-400 hidden md:table-cell"
-                >
-                  {header}
-                </th>
-              ))}
-            </tr>
+            <TableHeader />
           </thead>
           <tbody className="divide-y divide-gray-500">
             {paginatedProducts.map((product) => (
-              <motion.tr
+              <ProductTableRow
                 key={product.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1, duration: 0.3 }}
-                className={`flex flex-col md:table-row mb-4 md:mb-0 border-b md:border-b-0 border-gray-700 md:border-none p-2 md:p-0  ${
-                  editingRow === product.id ? "bg-[#2f2f2f] ring-gray-500" : ""
-                }`}
-              >
-                <td className="md:hidden px-3 py-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <Image
-                        src={product.image || "/fallback.png"}
-                        alt={product.name || "محصول"}
-                        width={36}
-                        height={36}
-                        className="w-9 h-9 rounded-full"
-                      />
-                      <div className="mr-3">
-                        <div className="text-base font-medium text-gray-300 text-right">
-                          {product.name}
-                        </div>
-                        <div className="text-base text-gray-300 text-right">
-                          شناسه: {product.id}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex flex-row-reverse space-x-reverse space-x-1 -mt-1 -mr-1">
-                      <button
-                        className="text-indigo-500 hover:text-indigo-300"
-                        onClick={() =>
-                          editingRow === product.id
-                            ? handleSaveClick()
-                            : product.id !== undefined
-                            ? handleEditClick(product.id)
-                            : undefined
-                        }
-                      >
-                        {editingRow === product.id ? (
-                          <Save size={16} />
-                        ) : (
-                          <Edit size={16} />
-                        )}{" "}
-                      </button>
-                      <button
-                        className="text-red-500 hover:text-red-300"
-                        onClick={() => {
-                          if (product.id !== undefined) {
-                            handleDeleteProduct(product.id);
-                          }
-                        }}
-                      >
-                        <Trash2 size={16} />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="mt-2 text-base text-gray-300 text-right">
-                    <div>دسته‌بندی: {product.category}</div>
-                    {/* // پیمایش روی لیستی از برچسب‌های فارسی فیلدهایی که باید
-                    نمایش یا ویرایش داده شوند */}
-                    {["قیمت", "موجودی", "فروش"].map((label) => {
-                      //   نگاشت عنوان فارسی به کلید معادل در شیء محصول (product)
-                      const fieldKey =
-                        label === "قیمت"
-                          ? "price"
-                          : label === "موجودی"
-                          ? "stock"
-                          : "sales";
-
-                      return (
-                        <div key={label} className="text-base">
-                          {/* نمایش عنوان فارسی فیلد */}
-                          <span>{label}: </span>
-
-                          {/* اگر در حالت ویرایش هستیم */}
-                          {editingRow === product.id ? (
-                            <input
-                              type="text"
-                              className="bg-transparent text-white border border-gray-400 w-20 text-center text-xs mx-1"
-                              // مقدار فیلد مربوطه را از شیء محصول نمایش می‌دهد
-                              value={product[fieldKey]}
-                              onChange={(e) => {
-                                // بررسی اینکه product.id تعریف شده باشد (احتیاطی برای جلوگیری از خطا)
-                                if (product.id !== undefined) {
-                                  // فراخوانی تابع تغییر مقدار (آپدیت کردن فیلد در product)
-                                  handleChange(
-                                    product.id,
-                                    fieldKey,
-                                    e.target.value
-                                  );
-                                }
-                              }}
-                            />
-                          ) : label === "قیمت" ? (
-                            // اگر فیلد "قیمت" باشد، مقدار آن را با دو رقم اعشار نمایش بده
-                            ` ${Number(product[fieldKey]).toFixed(2)} `
-                          ) : (
-                            // در غیر این صورت، مقدار فیلد را بدون تغییر نمایش بده
-                            product[fieldKey]
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </td>
-                <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base font-medium text-gray-300">
-                  <div className="flex items-center justify-start">
-                    <Image
-                      src={product.image || "/fallback.png"}
-                      alt={product.name || "محصول"}
-                      width={50}
-                      height={50}
-                      className="w-10 h-10 rounded-full"
-                    />
-                    <div className="mr-4">{product.name}</div>
-                  </div>
-                </td>
-                <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-gray-300 text-right">
-                  {product.id}
-                </td>
-                <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-gray-300 text-right">
-                  {product.category}
-                </td>
-                <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-gray-300 text-right">
-                  {editingRow === product.id ? (
-                    <input
-                      type="text"
-                      className="bg-transparent text-white border border-gray-400 w-20 text-center text-xs mx-1"
-                      value={product.price}
-                      onChange={(e) => {
-                        if (product.id !== undefined) {
-                          handleChange(product.id, "price", e.target.value);
-                        }
-                      }}
-                    />
-                  ) : (
-                    Number(product.price).toFixed(2)
-                  )}
-                </td>
-                <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-gray-300 text-right">
-                  {editingRow === product.id ? (
-                    <input
-                      type="text"
-                      className="bg-transparent text-white border border-gray-400 w-20 text-center text-xs mx-1"
-                      value={product.stock}
-                      onChange={(e) => {
-                        if (product.id !== undefined) {
-                          handleChange(product.id, "stock", e.target.value);
-                        }
-                      }}
-                    />
-                  ) : (
-                    product.stock
-                  )}
-                </td>
-                <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-gray-300 text-right">
-                  {editingRow === product.id ? (
-                    <input
-                      type="text"
-                      className="bg-transparent text-white border border-gray-400 w-20 text-center text-xs mx-1"
-                      value={product.sales}
-                      onChange={(e) => {
-                        if (product.id !== undefined) {
-                          handleChange(product.id, "sales", e.target.value);
-                        }
-                      }}
-                    />
-                  ) : (
-                    product.sales
-                  )}
-                </td>
-                <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                  <div className="flex space-x-4 -mx-2">
-                    <button
-                      className="text-indigo-500 hover:text-indigo-300 mr-1 cursor-pointer"
-                      onClick={() =>
-                        editingRow === product.id
-                          ? handleSaveClick()
-                          : product.id !== undefined
-                          ? handleEditClick(product.id)
-                          : undefined
-                      }
-                    >
-                      {editingRow === product.id ? (
-                        <Save size={18} />
-                      ) : (
-                        <Edit size={18} />
-                      )}
-                    </button>
-                    <button
-                      className="text-red-500 hover:text-red-300 cursor-pointer"
-                      onClick={() => {
-                        if (product.id !== undefined) {
-                          handleDeleteProduct(product.id);
-                        }
-                      }}
-                    >
-                      <Trash2 size={18} />
-                    </button>
-                  </div>
-                </td>
-              </motion.tr>
+                product={product}
+                editingRow={editingRow}
+                handleEditClick={handleEditClick}
+                handleSaveClick={handleSaveClick}
+                handleChange={handleChange}
+                handleDeleteProduct={handleDeleteProduct}
+              />
             ))}
           </tbody>
         </table>
