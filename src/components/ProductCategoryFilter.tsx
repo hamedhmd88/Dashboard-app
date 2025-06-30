@@ -13,6 +13,7 @@ interface ProductCategoryFilterProps {
         <option value="">همه محصولات</option>
         <option value="ورزشی">ورزشی</option>
         <option value="خانه">خانه</option>
+        <option value="الکترونیک">الکترونیک</option>
       </select>
     );
   };
