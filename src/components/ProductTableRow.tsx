@@ -1,4 +1,3 @@
-
 // ایمپورت کتابخانه‌های مورد نیاز
 import React from "react";
 import Image from "next/image";
@@ -96,18 +95,19 @@ const ProductTableRow = ({
         <div className="mt-2 text-base text-gray-300 text-right">
           <div>دسته‌بندی: {product.category}</div>
           {["قیمت", "موجودی", "فروش"].map((label) => {
-            // تبدیل لیبل فارسی به کلید فیلد داخل شی محصول
             const fieldKey =
               label === "قیمت"
                 ? "price"
                 : label === "موجودی"
                 ? "stock"
                 : "sales";
+
+            const value = Number(product[fieldKey]);
+
             return (
               <div key={label} className="text-base">
                 <span>{label}: </span>
                 {editingRow === product.id ? (
-                  // اگر در حال ویرایش باشد، ورودی قابل ویرایش نمایش داده می‌شود
                   <input
                     type="text"
                     className="bg-transparent text-white border border-gray-400 w-20 text-center text-xs mx-1"
@@ -123,9 +123,11 @@ const ProductTableRow = ({
                     }}
                   />
                 ) : label === "قیمت" ? (
-                  ` ${Number(product[fieldKey]).toFixed(2)} ` // نمایش قیمت با دو رقم اعشار
+                  <>{value.toLocaleString("fa-IR")} تومان</>
+                ) : label === "موجودی" ? (
+                  <>{value.toLocaleString("fa-IR")} عدد در انبار</>
                 ) : (
-                  (product[fieldKey] as any)
+                  <>{value.toLocaleString("fa-IR")} فروش</>
                 )}
               </div>
             );
@@ -167,7 +169,7 @@ const ProductTableRow = ({
             }}
           />
         ) : (
-          Number(product.price).toFixed(2)
+          `${Number(product.price).toLocaleString("fa-IR")} تومان`
         )}
       </td>
 
@@ -185,7 +187,7 @@ const ProductTableRow = ({
             }}
           />
         ) : (
-          product.stock
+          `${Number(product.stock).toLocaleString("fa-IR")} عدد در انبار`
         )}
       </td>
 
@@ -203,7 +205,7 @@ const ProductTableRow = ({
             }}
           />
         ) : (
-          product.sales
+          `${Number(product.sales).toLocaleString("fa-IR")} فروش`
         )}
       </td>
 

@@ -1,9 +1,7 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Edit, Save, Trash2 } from "lucide-react";
 import { Product } from "../../public/data/dataTypes";
-import Image from "next/image";
 import ProductSearchInput from "./ProductSearchInput";
 import ProductCategoryFilter from "./ProductCategoryFilter";
 import Pagination from "./Pagination";
