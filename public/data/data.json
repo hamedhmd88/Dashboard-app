@@ -51,48 +51,48 @@
   "orders": [
     {
       "id": "#A7B9D31",
-      "client": "اتان کارتر",
-      "email": "Ethan.Carter@example.com",
+      "client": "علی رضایی",
+      "email": "ali.rezaei@example.com",
       "total": 174.5,
       "status": "تحویل داده شده",
       "date": "۳۰ ژانویه ۲۰۲۵",
-      "country": "ایالات متحده آمریکا"
+      "country": "ایران"
     },
     {
       "id": "#X4Y2Z85",
-      "client": "سوفیا میچل",
-      "email": "Sophia.Mitchell@example.co.uk",
+      "client": "سارا محمدی",
+      "email": "sara.mohammadi@example.com",
       "total": 632.0,
       "status": "در انتظار",
       "date": "۲۳ فوریه ۲۰۲۵",
-      "country": "بریتانیا"
+      "country": "ایران"
     },
     {
       "id": "#M6N3P74",
-      "client": "لیام هریسون",
-      "email": "Liam.Harrison@example.de",
+      "client": "رضا احمدی",
+      "email": "reza.ahmadi@example.com",
       "total": 202.5,
       "status": "تحویل داده شده",
       "date": "۲۵ دسامبر ۲۰۲۴",
-      "country": "آلمان"
+      "country": "امارات"
     },
     {
       "id": "#K9L8T62",
-      "client": "آوا بنت",
-      "email": "Ava.Bennett@example.in",
+      "client": "مریم حسینی",
+      "email": "maryam.hosseini@example.com",
       "total": 330.0,
       "status": "لغو شده",
       "date": "۲۲ مارس ۲۰۲۵",
-      "country": "هند"
+      "country": "امارات"
     },
     {
       "id": "#Q5R7W30",
-      "client": "نوآ رینولدز",
-      "email": "Noah.Reynolds@example.au",
+      "client": "حسین کاظمی",
+      "email": "hossein.kazemi@example.com",
       "total": 595.5,
       "status": "تحویل داده شده",
       "date": "۵ مارس ۲۰۲۵",
-      "country": "استرالیا"
+      "country": "ایران"
     }
   ],
   "orderStats": [
@@ -203,42 +203,42 @@
   "clients": [
     {
       "id": 1,
-      "name": "اتان کارتر",
-      "email": "Ethan.Carter@example.com",
+      "name": "علی رضایی",
+      "email": "ali.rezaei@example.com",
       "phoneNumber": "+1 415-678-9023",
-      "country": "ایالات متحده آمریکا",
+      "country": "ایران",
       "image": "/images/user1.jpg"
     },
     {
       "id": 2,
-      "name": "سوفیا میچل",
-      "email": "Sophia.Mitchell@example.com",
+      "name": "سارا محمدی",
+      "email": "sara.mohammadi@example.com",
       "phoneNumber": "+44 7911 123456",
-      "country": "بریتانیا",
+      "country": "ایران",
       "image": "/images/user2.jpg"
     },
     {
       "id": 3,
-      "name": "لیام هریسون",
-      "email": "Liam.Harrison@example.com",
+      "name": "رضا احمدی",
+      "email": "reza.ahmadi@example.com",
       "phoneNumber": "+49 1523 4567890",
-      "country": "آلمان",
+      "country": "امارات",
       "image": "/images/user3.jpg"
     },
     {
       "id": 4,
-      "name": "آوا بنت",
-      "email": "Ava.Bennett@example.com",
+      "name": "مریم حسینی",
+      "email": "maryam.hosseini@example.com",
       "phoneNumber": "+91 98765 43210",
-      "country": "هند",
+      "country": "امارات",
       "image": "/images/user4.jpg"
     },
     {
       "id": 5,
-      "name": "نوآ رینولدز",
-      "email": "Noah.Reynolds@example.com",
+      "name": "حسین کاظمی",
+      "email": "hossein.kazemi@example.com",
       "phoneNumber": "+61 412 345 678",
-      "country": "استرالیا",
+      "country": "ایران",
       "image": "/images/user5.jpg"
     }
   ],
