@@ -1,4 +1,6 @@
 "use client";
+
+// ایمپورت کردن کتابخانه‌های مورد نیاز
 import React, { useEffect, useState } from "react";
 import {
   ResponsiveContainer,
@@ -8,25 +10,26 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { Category } from "../../public/data/dataTypes"; // مسیر را چک کنید
+import { Category } from "../../public/data/dataTypes";
 import { motion } from "framer-motion";
 
-// COLORS: مطمئن شوید که تعداد رنگ‌ها با تعداد دسته‌بندی‌های شما (گوشی هوشمند، لپتاپ، مبلمان، زیبایی، لوازم جانبی بازی) مطابقت دارد.
-// اگر 5 دسته دارید، 5 رنگ باید باشد.
-// با توجه به عکس، 5 رنگ دارید: قرمز، آبی، نارنجی، سبزآبی، بنفش کم‌رنگ
+// تعریف رنگ‌های مورد استفاده در نمودار دایره‌ای
+// هر رنگ مربوط به یک دسته‌بندی است: گوشی هوشمند (قرمز)، لپتاپ (آبی)، مبلمان (نارنجی)، زیبایی (سبزآبی)، لوازم جانبی بازی (بنفش)
 const COLORS = ["#FF6B6B", "#4D96FF", "#FFD166", "#06D6A0", "#A29BFE"];
-//  گوشی هوشمند (قرمز)، لپتاپ (آبی)، مبلمان (نارنجی)، زیبایی و مراقبت شخصی (سبزآبی)، لوازم جانبی بازی (بنفش)
 
 const CategoryChart = () => {
+  // تعریف state برای نگهداری داده‌های دسته‌بندی و وضعیت صفحه نمایش
   const [categoryData, setCategoryData] = useState<Category[]>([]);
   const [isSmallMediaScreen, setIsSmallMediaScreen] = useState<boolean>(false);
 
+  // دریافت داده‌ها از فایل JSON در هنگام بارگذاری کامپوننت
   useEffect(() => {
     fetch("/data/data.json")
       .then((res) => res.json())
       .then((data) => setCategoryData(data.categories));
   }, []);
 
+  // بررسی سایز صفحه نمایش و به‌روزرسانی state مربوطه
   useEffect(() => {
     const updateScreenSize = () => {
       setIsSmallMediaScreen(window.innerWidth <= 768);
@@ -38,9 +41,10 @@ const CategoryChart = () => {
     };
   }, []);
 
+  // تنظیم شعاع خارجی نمودار بر اساس سایز صفحه
   const outerRadius = isSmallMediaScreen ? 60 : 90;
 
-  // تابع سفارشی برای رندر کردن لیبل‌ها (دقیقاً مشابه OrderChart)
+  // تابع سفارشی برای رندر کردن برچسب‌های نمودار
   const renderCustomizedLabel = ({
     cx,
     cy,
@@ -48,76 +52,72 @@ const CategoryChart = () => {
     outerRadius,
     percent,
     name,
-    fill, // دریافت رنگ قطعه
+    fill,
   }: any) => {
     const RADIAN = Math.PI / 180;
     const sin = Math.sin(-midAngle * RADIAN);
     const cos = Math.cos(-midAngle * RADIAN);
 
-    // مختصات نهایی برای پایان خط راهنما و شروع متن
-    // نقطه شروع خط راهنما روی outerRadius + 5 پیکسل (برای فاصله کم از دایره)
+    // محاسبه موقعیت خطوط راهنما و متن
     const x1 = cx + (outerRadius + 5) * cos;
     const y1 = cy + (outerRadius + 5) * sin;
-
-    // نقطه پایان خط راهنما (که لیبل از آن فاصله می‌گیرد)
-    const x2 = cx + (outerRadius + 25) * cos; // 25 پیکسل فاصله از outerRadius برای نقطه پایانی خط
+    const x2 = cx + (outerRadius + 25) * cos;
     const y2 = cy + (outerRadius + 25) * sin;
+    const textFinalX = cx + (outerRadius + 40) * cos;
+    const textFinalY = cy + (outerRadius + 40) * sin;
 
-    // مختصات نهایی متن (فاصله بیشتر از خط راهنما)
-    const textFinalX = cx + (outerRadius + 40) * cos; // 40 پیکسل فاصله متن از مرکز دایره
-    const textFinalY = cy + (outerRadius + 40) * sin; // 40 پیکسل فاصله متن از مرکز دایره
-
-    // تصمیم‌گیری برای textAnchor (مهم برای RTL)
-    // اگر لیبل در سمت راست محور عمودی باشد (cos > 0)، متن از نقطه خود به سمت چپ (پایان متن) می‌رود
-    // اگر لیبل در سمت چپ محور عمودی باشد (cos < 0)، متن از نقطه خود به سمت راست (شروع متن) می‌رود
+    // تعیین نقطه شروع متن برای پشتیبانی از RTL
     const anchor = cos >= 0 ? "end" : "start";
 
     return (
       <g>
-        {/* خط راهنما - رنگ آن با رنگ قطعه یکسان است */}
+        {/* رسم خط راهنما */}
         <path d={`M${x1},${y1}L${x2},${y2}`} stroke={fill} fill="none" />
-        {/* متن لیبل */}
+        {/* نمایش متن برچسب */}
         <text
           x={textFinalX}
           y={textFinalY}
-          direction="rtl" // بسیار مهم برای RTL در SVG
-          textAnchor={anchor} // تراز افقی متن
-          dominantBaseline="middle" // تراز عمودی متن
-          fill={fill} // رنگ متن برابر با رنگ قطعه
+          direction="rtl"
+          textAnchor={anchor}
+          dominantBaseline="middle"
+          fill={fill}
           style={{
-            fontSize: "15px", // <--- فونت را بزرگتر کردیم (مثلاً 15px)
+            fontSize: "15px",
           }}
         >
-          {`${name} %${Math.round(percent * 100)}`}{" "}
-          {/* <--- درصد را به فرمت فارسی (قبل از عدد) تغییر دادیم */}
+          {`${name} %${Math.round(percent * 100)}`}
         </text>
       </g>
     );
   };
 
   return (
+    // کانتینر اصلی با انیمیشن ورودی
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2, duration: 0.5 }}
-      // اضافه کردن dir="rtl" و text-right برای پشتیبانی کامل RTL
       className="bg-[#0A0A0A] backdrop-blur-md shadow-lg rounded-xl p-4 md:p-6 border border-[#1f1f1f] mx-2 md:mx-0 text-right"
     >
+      {/* عنوان نمودار */}
       <h2 className="text-base md:text-lg font-medium mb-4 text-gray-300 text-center md:text-right">
-        دسته بندی محصولات{" "}
+        دسته بندی محصولات
       </h2>
+      {/* کانتینر نمودار */}
       <div className="h-64 md:h-80">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
+            {/* تنظیمات نمودار دایره‌ای */}
             <Pie
               data={categoryData}
               cx="50%"
               cy="50%"
-              labelLine={false} // این خط را دیگر لازم نداریم چون در تابع renderCustomizedLabel رسم می‌شود
+              labelLine={false}
               outerRadius={outerRadius}
               dataKey="value"
-              label={renderCustomizedLabel} // استفاده از تابع سفارشی renderCustomizedLabel
+              label={renderCustomizedLabel}
             >
+              {/* رندر کردن بخش‌های نمودار با رنگ‌های مختلف */}
               {categoryData.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
@@ -125,6 +125,7 @@ const CategoryChart = () => {
                 />
               ))}
             </Pie>
+            {/* تنظیمات تولتیپ */}
             <Tooltip
               contentStyle={{
                 backgroundColor: "rgba(31, 41, 55, 0.8)",
@@ -138,9 +139,10 @@ const CategoryChart = () => {
               itemStyle={{
                 color: "#e5e7eb",
                 direction: "rtl",
-                fontFamily: "Vazirmatn, Tahoma, Arial, sans-serif", // اطمینان از فونت فارسی
+                fontFamily: "Vazirmatn, Tahoma, Arial, sans-serif",
               }}
             />
+            {/* تنظیمات راهنمای نمودار */}
             <Legend
               iconType="circle"
               layout="horizontal"
@@ -156,7 +158,7 @@ const CategoryChart = () => {
               formatter={(value) => (
                 <span style={{ marginRight: 8, direction: "rtl" }}>
                   {value}
-                </span> // اطمینان از جهت‌دهی RTL در لجند
+                </span>
               )}
             />
           </PieChart>
