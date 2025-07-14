@@ -1,9 +1,15 @@
+/**
+ * این کامپوننت ردیف جدول مشتریان را نمایش می‌دهد.
+ * امکان ویرایش، ذخیره و حذف مشتری را فراهم می‌کند.
+ * طراحی ریسپانسیو برای موبایل و دسکتاپ دارد.
+ */
 import React from "react";
 import Image from "next/image";
 import { Edit, Save, Trash2 } from "lucide-react";
 import { Client } from "../../public/data/dataTypes";
 import { motion } from "framer-motion";
 
+// اینترفیس پراپس کامپوننت]
 interface ClientTableRowProps {
   client: Client;
   editingRow: number | null;
@@ -17,6 +23,7 @@ interface ClientTableRowProps {
   handleDeleteClient: (id: number) => void;
 }
 
+// کامپوننت اصلی ردیف جدول
 const ClientTableRow = ({
   client,
   editingRow,
@@ -26,15 +33,18 @@ const ClientTableRow = ({
   handleDeleteClient,
 }: ClientTableRowProps) => {
   return (
-    <motion.tr
+    // ردیف جدول با انیمیشن
+      <motion.tr
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1, duration: 0.3 }}
       className={`flex flex-col md:table-row mb-4 md:mb-0 border-b md:border-b-0 border-gray-700 md:border-none p-2 md:p-0  
         ${editingRow === client.id ? "bg-[#2f2f2f] ring-gray-500" : ""}`}
     >
+      {/* // نمایش برای موبایل */}
       <td className="md:hidden px-3 py-2">
         <div className="flex items-center justify-between">
+          {/* // نمایش تصویر و نام مشتری */}
           <div className="flex items-center">
             <Image
               src={client.image || "/fallback.png"}
@@ -81,6 +91,7 @@ const ClientTableRow = ({
             </button>
           </div>
         </div>
+        {/* // جزئیات اضافی برای موبایل */}
         <div className="mt-2 text-base text-gray-300 text-right">
           <div>شماره تلفن: {client.phoneNumber}</div>
           <div>کشور: {client.country}</div>
@@ -116,6 +127,7 @@ const ClientTableRow = ({
           )}
         </div>
       </td>
+      {/* // نمایش نام و تصویر برای دسکتاپ */}
       <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base font-medium text-gray-300">
         <div className="flex items-center justify-start">
           <Image
@@ -128,6 +140,7 @@ const ClientTableRow = ({
           <div className="mr-4">{client.name}</div>
         </div>
       </td>
+      {/* // فیلد ایمیل با امکان ویرایش */}
       <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-gray-300 text-right">
         {editingRow === client.id ? (
           <input
@@ -191,4 +204,5 @@ const ClientTableRow = ({
   );
 };
 
+// اکسپورت کامپوننت
 export default ClientTableRow;

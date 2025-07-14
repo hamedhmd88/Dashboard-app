@@ -1,5 +1,10 @@
+/**
+ * این کامپوننت هدر جدول مشتریان را تعریف می‌کند.
+ * هدرها شامل نام، ایمیل، شماره تلفن، کشور و عملیات هستند.
+ */
 import React from "react";
 
+// آرایه هدرهای جدول
 const headers = [
   "نام",
   "ایمیل",
@@ -8,9 +13,11 @@ const headers = [
   "عملیات",
 ];
 
+// کامپوننت اصلی هدر جدول
 const ClientTableHeader = () => (
   <tr>
     {headers.map((header) => (
+      // ایجاد سلول هدر برای هر عنوان
       <th
         key={header}
         className="px-3 md:px-6 py-2 md:py-3 text-right text-md font-medium text-gray-400 hidden md:table-cell"
@@ -21,4 +28,5 @@ const ClientTableHeader = () => (
   </tr>
 );
 
+// اکسپورت کامپوننت
 export default ClientTableHeader;
