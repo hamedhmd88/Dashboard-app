@@ -60,14 +60,14 @@ function Sidebar() {
             return (
               <Link key={name} href={href}>
                 <div
-                  className={`flex items-center p-4 text-sm font-medium rounded-lg hover:bg-[#1F1F1F] transition-all mb-2 ${
+                  className={`flex items-center p-4 text-sm font-medium rounded-lg hover:bg-[#1F1F1F] transition-all mb-2 group relative ${
                     pathname === item.href ? "bg-[#1F1F1F]" : ""
                   }`}
                 >
                   {IconComponent && (
                     <IconComponent size={20} style={{ minWidth: "20px" }} />
                   )}
-                  {isSidebarOpen && (
+                  {isSidebarOpen ? (
                     <span
                       className={`mr-4 lg:font-medium lg:text-lg whitespace-nowrap transition-all duration-500 ease-in-out \
                         ${
@@ -76,6 +76,10 @@ function Sidebar() {
                             : "opacity-0 -translate-x-4 pointer-events-none"
                         }`}
                     >
+                      {name}
+                    </span>
+                  ) : (
+                    <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 bg-[#1F1F1F] text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity z-20 whitespace-nowrap">
                       {name}
                     </span>
                   )}
