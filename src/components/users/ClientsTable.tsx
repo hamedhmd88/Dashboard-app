@@ -10,79 +10,138 @@ import { Client } from "../../../public/data/dataTypes";
 import ClientSearchInput from "./ClientSearchInput";
 import Pagination from "../Pagination";
 import ClientTableRow from "./ClientTableRow";
+import ClientCountryFilter from "./ClientCountryFilter";
 
 const ITEMS_PER_PAGE = 4;
 
-const ClientsTable = () => {
-  const [clients, setClients] = useState<Client[]>([]);
-  const [editingRow, setEditingRow] = useState<number | null>(null);
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  /** 
+   * کامپوننت اصلی جدول مشتریان که داده‌ها را مدیریت و نمایش می‌دهد.
+   */
+  const ClientsTable = () => {
+    // تعریف حالت برای لیست مشتریان
+    const [clients, setClients] = useState<Client[]>([]);
+    // تعریف حالت برای ردیف در حال ویرایش
+    const [editingRow, setEditingRow] = useState<number | null>(null);
+    // تعریف حالت برای عبارت جستجو
+    const [searchTerm, setSearchTerm] = useState<string>("");
+    // تعریف حالت برای صفحه فعلی
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [selectedCountry, setSelectedCountry] = useState<string>("");
 
-  useEffect(() => {
-    fetch("/data/data.json")
-      .then((res) => res.json())
-      .then((data) => setClients(data.clients));
-  }, []);
+    /**
+     * هوک برای واکشی داده‌ها هنگام بارگذاری کامپوننت.
+     */
+    useEffect(() => {
+      // ارسال درخواست به فایل JSON
+      fetch("/data/data.json")
+        // تبدیل پاسخ به JSON
+        .then((res) => res.json())
+        // تنظیم حالت مشتریان با داده‌های دریافتی
+        .then((data) => setClients(data.clients));
+    }, []); // آرایه وابستگی خالی برای اجرای تنها یک بار
 
-  const handleEditClick = (id: number): void => {
-    setEditingRow(id);
-  };
+    /**
+     * تابع برای شروع ویرایش یک ردیف خاص.
+     * @param id - شناسه مشتری
+     */
+    const handleEditClick = (id: number): void => {
+      // تنظیم ردیف در حال ویرایش به شناسه داده شده
+      setEditingRow(id);
+    };
 
-  const handleSaveClick = (): void => {
-    setEditingRow(null);
-  };
+    /**
+     * تابع برای ذخیره تغییرات و پایان ویرایش.
+     */
+    const handleSaveClick = (): void => {
+      // بازنشانی ردیف در حال ویرایش به null
+      setEditingRow(null);
+    };
 
-  const handleChange = (
-    id: number,
-    field: keyof Client,
-    value: string
-  ): void => {
-    setClients((prevClients) =>
-      prevClients.map((client) =>
-        client.id === id
-          ? {
-              ...client,
-              [field]: value,
-            }
-          : client
-      )
-    );
-  };
-
-  const handleDeleteClient = (id: number) => {
-    setClients((prevClients) =>
-      prevClients.filter((client) => client.id !== id)
-    );
-  };
-
-  const filteredClients = useMemo(() => {
-    const trimmedSearch = searchTerm.trim().toLowerCase();
-    return clients.filter((client) => {
-      return (
-        !trimmedSearch ||
-        client.name?.toLowerCase().includes(trimmedSearch) ||
-        client.email?.toLowerCase().includes(trimmedSearch) ||
-        client.country?.toLowerCase().includes(trimmedSearch)
+    /**
+     * تابع برای تغییر مقادیر فیلدهای مشتری.
+     * @param id - شناسه مشتری
+     * @param field - نام فیلد
+     * @param value - مقدار جدید
+     */
+    const handleChange = (
+      id: number,
+      field: keyof Client,
+      value: string
+    ): void => {
+      // به‌روزرسانی لیست مشتریان
+      setClients((prevClients) =>
+        // نقشه‌برداری روی مشتریان قبلی
+        prevClients.map((client) =>
+          // بررسی اگر شناسه مطابقت دارد
+          client.id === id
+            ? {
+                // کپی مشتری و به‌روزرسانی فیلد
+                ...client,
+                [field]: value,
+              }
+            : client // بازگشت مشتری بدون تغییر
+        )
       );
-    });
-  }, [clients, searchTerm]);
+    };
 
-  const totalPages = Math.ceil(filteredClients.length / ITEMS_PER_PAGE);
+    /**
+     * تابع برای حذف یک مشتری.
+     * @param id - شناسه مشتری
+     */
+    const handleDeleteClient = (id: number) => {
+      // به‌روزرسانی لیست مشتریان با فیلتر کردن
+      setClients((prevClients) =>
+        // حذف مشتری با شناسه داده شده
+        prevClients.filter((client) => client.id !== id)
+      );
+    };
 
-  const paginatedClients = useMemo(() => {
-    const start = (currentPage - 1) * ITEMS_PER_PAGE;
-    const end = start + ITEMS_PER_PAGE;
-    return filteredClients.slice(start, end);
-  }, [filteredClients, currentPage]);
+    /**
+     * محاسبه مشتریان فیلتر شده بر اساس جستجو.
+     */
+    const filteredClients = useMemo(() => {
+      // پاکسازی عبارت جستجو و تبدیل به حروف کوچک
+      const trimmedSearch = searchTerm.trim().toLowerCase();
+      // فیلتر کردن لیست مشتریان
+      return clients.filter((client) => {
+        // شرط بازگشت true اگر جستجو خالی است یا مطابقت دارد
+        return (
+          !trimmedSearch ||
+          client.name?.toLowerCase().includes(trimmedSearch)
+    
+        ) && (!selectedCountry || client.country === selectedCountry);
+      });
+    }, [clients, searchTerm, selectedCountry]); // وابستگی‌ها برای به‌روزرسانی
 
-  const handlePageChange = (page: number) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
+    // محاسبه تعداد صفحات کل
+    const totalPages = Math.ceil(filteredClients.length / ITEMS_PER_PAGE);
 
-  return (
+    /**
+     * محاسبه مشتریان صفحه‌بندی شده.
+     */
+    const paginatedClients = useMemo(() => {
+      // محاسبه شروع صفحه
+      const start = (currentPage - 1) * ITEMS_PER_PAGE;
+      // محاسبه پایان صفحه
+      const end = start + ITEMS_PER_PAGE;
+      // برش لیست فیلتر شده
+      return filteredClients.slice(start, end);
+    }, [filteredClients, currentPage]); // وابستگی‌ها برای به‌روزرسانی
+
+    /**
+     * تابع برای تغییر صفحه.
+     * @param page - شماره صفحه جدید
+     */
+    const handlePageChange = (page: number) => {
+      // بررسی محدوده صفحه
+      if (page >= 1 && page <= totalPages) {
+        // تنظیم صفحه فعلی
+        setCurrentPage(page);
+      }
+    };
+
+    // بازگشت JSX برای رندر کامپوننت
+    return (
     <motion.div
       className="bg-[#0A0A0A] backdrop-blur-md shadow-lg rounded-xl p-4 md:p-6 border border-[#1f1f1f] mx-2 md:mx-0 mb-8"
       initial={{ opacity: 0, y: 20 }}
@@ -99,6 +158,13 @@ const ClientsTable = () => {
           value={searchTerm}
           onChange={(val) => {
             setSearchTerm(val);
+            setCurrentPage(1);
+          }}
+        />
+        <ClientCountryFilter
+          value={selectedCountry}
+          onChange={(val) => {
+            setSelectedCountry(val);
             setCurrentPage(1);
           }}
         />
