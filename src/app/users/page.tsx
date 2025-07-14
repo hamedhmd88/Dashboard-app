@@ -1,15 +1,9 @@
 "use client";
 
 import StateCard from "@/components/StateCard";
-import {
-  ChartBarStacked,
-  Globe,
-  Mail,
-  Phone,
-  Users,
-} from "lucide-react";
+import { Users, User, Mail, Globe, Phone } from "lucide-react";
 import { motion } from "framer-motion";
-import ClientsTable from "@/components/clients";
+import ClientsTable from "@/components/users/ClientsTable";
 
 function UsersPage() {
   return (
@@ -21,10 +15,10 @@ function UsersPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <StateCard name="کل کاربران" icon={Users} value={"۵,۲۳۰"} />
-          <StateCard name="کل کشورها" icon={Globe} value={"۱۵"} />
-          <StateCard name="کل ایمیل‌ها" icon={Mail} value={"۴,۸۰۰"} />
-          <StateCard name="کل شماره تلفن‌ها" icon={Phone} value={"۴,۵۰۰"} />
+          <StateCard name="کل مشتریان" icon={Users} value={"۵"} />
+          <StateCard name="ایمیل‌ها" icon={Mail} value={"۵"} />
+          <StateCard name="کشورها" icon={Globe} value={"۲"} />
+          <StateCard name="شماره تماس‌ها" icon={Phone} value={"۵"} />
         </motion.div>
         <ClientsTable/>
       </main>

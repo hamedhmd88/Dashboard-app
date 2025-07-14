@@ -9,7 +9,7 @@ import {
   Users,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import ProductsTable from "@/components/ProductsTable";
+import ProductsTable from "@/components/products/ProductsTable";
 
 function ProductsPage() {
   return (

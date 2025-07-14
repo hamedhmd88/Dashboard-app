@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Product } from "../../public/data/dataTypes";
+import { Product } from "../../../public/data/dataTypes";
 import ProductSearchInput from "./ProductSearchInput";
 import ProductCategoryFilter from "./ProductCategoryFilter";
-import Pagination from "./Pagination";
+import Pagination from "../Pagination";
 import ProductTableRow from "./ProductTableRow";
-import TableHeader from "./TableHeader";
+import TableHeader from "../TableHeader";
 
 const ITEMS_PER_PAGE = 4;
 

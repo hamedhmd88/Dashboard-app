@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { Edit, Save, Trash2 } from "lucide-react"; // آیکون‌ها
-import { Product } from "../../public/data/dataTypes"; // نوع داده‌ی محصول
+import { Product } from "../../../public/data/dataTypes"; // نوع داده‌ی محصول
 import { motion } from "framer-motion"; // برای انیمیشن
 
 // تعریف پراپرتی‌های مورد انتظار از کامپوننت
