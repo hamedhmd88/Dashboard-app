@@ -9,17 +9,13 @@ import { Edit, Save, Trash2 } from "lucide-react";
 import { Client } from "../../../public/data/dataTypes";
 import { motion } from "framer-motion";
 
-// اینترفیس پراپس کامپوننت]
+// اینترفیس پراپس کامپوننت
 interface ClientTableRowProps {
   client: Client;
   editingRow: number | null;
   handleEditClick: (id: number) => void;
   handleSaveClick: () => void;
-  handleChange: (
-    id: number,
-    field: keyof Client,
-    value: string
-  ) => void;
+  handleChange: (id: number, field: keyof Client, value: string) => void;
   handleDeleteClient: (id: number) => void;
 }
 
@@ -34,7 +30,7 @@ const ClientTableRow = ({
 }: ClientTableRowProps) => {
   return (
     // ردیف جدول با انیمیشن
-      <motion.tr
+    <motion.tr
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1, duration: 0.3 }}
