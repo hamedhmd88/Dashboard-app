@@ -1,5 +1,5 @@
 import Image from "next/image";
-import uk from "../../public/images/uk.png";
+import IR from "../../public/images/IR.png";
 import { Bell } from "lucide-react";
 import admin from "../../public/images/admin.jpg";
 function Header() {
@@ -12,7 +12,7 @@ function Header() {
           </h1>
           <div className=" flex items-center space-x-3 sm:space-x-6">
             <Image
-              src={uk}
+              src={IR}
               alt="country"
               width={25}
               height={18}

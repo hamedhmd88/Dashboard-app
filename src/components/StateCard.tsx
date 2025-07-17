@@ -14,7 +14,7 @@ function StateCard({ name, icon: Icon, value }: StateCardProps) {
     >
       <div className=" px-4 py-5 sm:p-6">
         <span className=" flex items-center text-base font-medium text-gray-300 tracking-wide drop-shadow-md">
-          <Icon size={30} className="ml-4" />
+          {Icon && <Icon size={30} className="ml-4" />}
           <span className="ml-2 text-lg">{name}</span>
         </span>
         <p className=" mt-1 text-3xl font-semibold text-gray-300">{value}</p>
