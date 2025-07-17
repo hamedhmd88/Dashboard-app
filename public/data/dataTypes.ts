@@ -68,6 +68,7 @@ export interface SidebarItem {
 
 export interface DashboardData {
   sales?: Sale[];
+  salesRecords?: SaleRecord[];
   categories?: Category[];
   orderStatus?: OrderStatus[];
   productPerformance?: ProductPerformance[];
@@ -77,4 +78,20 @@ export interface DashboardData {
   salesByCategory?: SalesByCategory[];
   clients?: Client[];
   sidebarItems?: SidebarItem[];
+  yearlySales?: YearlySales[];
+}
+
+// Add a detailed Sale type for the sales page
+export interface SaleRecord {
+  id: string;
+  date: string;
+  amount: number;
+  status: "موفق" | "لغو شده";
+  profit: number; // سود یا ضرر
+}
+
+export interface YearlySales {
+  year: string;
+  revenue: number;
+  profit: number;
 }

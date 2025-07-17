@@ -268,7 +268,7 @@
       "country": "ایران",
       "image": "/images/user5.jpg"
     },
-     {
+    {
       "id": 6,
       "name": "مریم حسینی",
       "email": "maryam.hosseini@example.com",
@@ -287,5 +287,84 @@
     { "name": "پیام‌ها", "icon": "Mail", "href": "" },
     { "name": "اعلان‌ها", "icon": "Bell", "href": "" },
     { "name": "راهنما", "icon": "Info", "href": "" }
+  ],
+  "salesRecords": [
+    {
+      "id": "SR-1001",
+      "date": "1403/02/10",
+      "amount": 18500000,
+      "status": "موفق",
+      "profit": 3500000
+    },
+    {
+      "id": "SR-1002",
+      "date": "1403/02/11",
+      "amount": 32000000,
+      "status": "موفق",
+      "profit": 7000000
+    },
+    {
+      "id": "SR-1003",
+      "date": "1403/02/12",
+      "amount": 2500000,
+      "status": "لغو شده",
+      "profit": -500000
+    },
+    {
+      "id": "SR-1004",
+      "date": "1403/02/13",
+      "amount": 21000000,
+      "status": "موفق",
+      "profit": 4000000
+    },
+    {
+      "id": "SR-1005",
+      "date": "1403/02/14",
+      "amount": 12000000,
+      "status": "موفق",
+      "profit": 2000000
+    },
+    {
+      "id": "SR-1006",
+      "date": "1403/02/15",
+      "amount": 17500000,
+      "status": "لغو شده",
+      "profit": -2000000
+    },
+    {
+      "id": "SR-1007",
+      "date": "1403/02/16",
+      "amount": 9000000,
+      "status": "موفق",
+      "profit": 1500000
+    },
+    {
+      "id": "SR-1008",
+      "date": "1403/02/17",
+      "amount": 15000000,
+      "status": "موفق",
+      "profit": 2500000
+    },
+    {
+      "id": "SR-1009",
+      "date": "1403/02/18",
+      "amount": 8000000,
+      "status": "لغو شده",
+      "profit": -1000000
+    },
+    {
+      "id": "SR-1010",
+      "date": "1403/02/19",
+      "amount": 22000000,
+      "status": "موفق",
+      "profit": 5000000
+    }
+  ],
+  "yearlySales": [
+    { "year": "1400", "revenue": 100000000, "profit": 15000000 },
+    { "year": "1401", "revenue": 120000000, "profit": 25000000 },
+    { "year": "1402", "revenue": 145000000, "profit": 32000000 },
+    { "year": "1403", "revenue": 165000000, "profit": 41000000 },
+    { "year": "1404", "revenue": 195000000, "profit": 51000000 }
   ]
 }
