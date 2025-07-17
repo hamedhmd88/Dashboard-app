@@ -53,7 +53,7 @@
       "id": "#A7B9D31",
       "client": "علی رضایی",
       "email": "ali.rezaei@example.com",
-      "total": 174.5,
+      "total": 174,
       "status": "تحویل داده شده",
       "date": "۳۰ ژانویه ۲۰۲۵",
       "country": "ایران"
@@ -62,7 +62,7 @@
       "id": "#X4Y2Z85",
       "client": "سارا محمدی",
       "email": "sara.mohammadi@example.com",
-      "total": 632.0,
+      "total": 632,
       "status": "در انتظار",
       "date": "۲۳ فوریه ۲۰۲۵",
       "country": "ایران"
@@ -71,7 +71,7 @@
       "id": "#M6N3P74",
       "client": "رضا احمدی",
       "email": "reza.ahmadi@example.com",
-      "total": 202.5,
+      "total": 202,
       "status": "تحویل داده شده",
       "date": "۲۵ دسامبر ۲۰۲۴",
       "country": "امارات"
@@ -80,7 +80,7 @@
       "id": "#K9L8T62",
       "client": "مریم حسینی",
       "email": "maryam.hosseini@example.com",
-      "total": 330.0,
+      "total": 330,
       "status": "لغو شده",
       "date": "۲۲ مارس ۲۰۲۵",
       "country": "امارات"
@@ -89,9 +89,36 @@
       "id": "#Q5R7W30",
       "client": "حسین کاظمی",
       "email": "hossein.kazemi@example.com",
-      "total": 595.5,
+      "total": 595,
       "status": "تحویل داده شده",
       "date": "۵ مارس ۲۰۲۵",
+      "country": "ایران"
+    },
+    {
+      "id": "#F2G4H56",
+      "client": "فاطمه علیپور",
+      "email": "fateme.alipour@example.com",
+      "total": 450,
+      "status": "در حال پردازش",
+      "date": "۱۰ آوریل ۲۰۲۵",
+      "country": "ایران"
+    },
+    {
+      "id": "#I8J0K12",
+      "client": "محمد صالحی",
+      "email": "mohammad.salehi@example.com",
+      "total": 280,
+      "status": "لغو شده",
+      "date": "۱۵ مه ۲۰۲۵",
+      "country": "امارات"
+    },
+    {
+      "id": "#L3M5N78",
+      "client": "زهرا رضایی",
+      "email": "zahra.rezaei@example.com",
+      "total": 720,
+      "status": "در انتظار",
+      "date": "۲۰ ژوئن ۲۰۲۵",
       "country": "ایران"
     }
   ],

@@ -4,6 +4,7 @@ import { Ban, CheckCircle, Clock, ShoppingBag } from "lucide-react";
 import { useState, useEffect } from "react";
 import { OrderStat } from "../../../public/data/dataTypes";
 import StatCard from "../../components/StateCard";
+import OrdersTable from "../../components/orders/OrdersTable";
 
 const iconMap = {
   ShoppingBag,
@@ -42,6 +43,7 @@ function OrdersPage() {
             );
           })}
         </motion.div>
+        <OrdersTable />
       </div>
     </div>
   );

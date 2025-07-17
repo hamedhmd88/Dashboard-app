@@ -24,7 +24,7 @@ const Pagination = ({
         className={`px-3 py-1 rounded-md border ${
           currentPage === 1
             ? "text-gray-500 border-gray-700 cursor-not-allowed" // ظاهر دکمه غیرفعال
-            : "text-white border-gray-600 hover:bg-gray-800" // ظاهر دکمه فعال
+            : "text-white border-gray-600 hover:bg-[#1F1F1F] cursor-pointer" // ظاهر دکمه فعال
         }`}
       >
         قبل
@@ -39,7 +39,7 @@ const Pagination = ({
             className={`px-3 py-1 rounded-md border ${
               currentPage === page
                 ? "bg-white text-black font-semibold" // صفحه فعال با ظاهر متفاوت
-                : "border-gray-600 text-gray-300 hover:bg-gray-800" // صفحات دیگر
+                : "border-gray-600 text-gray-300 hover:bg-[#1F1F1F] cursor-pointer" // صفحات دیگر
             }`}
           >
             {page} {/* شماره صفحه */}
@@ -59,7 +59,7 @@ const Pagination = ({
         className={`px-3 py-1 rounded-md border ${
           currentPage === totalPages
             ? "text-gray-500 border-gray-700 cursor-not-allowed" // ظاهر دکمه غیرفعال
-            : "text-white border-gray-600 hover:bg-gray-800" // ظاهر دکمه فعال
+            : "text-white border-gray-600 hover:bg-[#1F1F1F] cursor-pointer" // ظاهر دکمه فعال
         }`}
       >
         بعد
