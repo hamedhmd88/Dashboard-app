@@ -35,7 +35,7 @@ const ClientTableRow = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1, duration: 0.3 }}
       className={`flex flex-col md:table-row mb-4 md:mb-0 border-b md:border-b-0 border-gray-700 md:border-none p-2 md:p-0  
-        ${editingRow === client.id ? "bg-[#2f2f2f] ring-gray-500" : ""}`}
+        ${editingRow === client.id ? "bg-[var(--editing-bg)] ring-gray-500" : ""}`}
     >
       {/* // نمایش برای موبایل */}
       <td className="md:hidden px-3 py-2">
@@ -50,10 +50,10 @@ const ClientTableRow = ({
               className="w-9 h-9 rounded-full"
             />
             <div className="mr-3">
-              <div className="text-base font-medium text-gray-300 text-right">
+              <div className="text-base font-medium text-[var(--text-secondary)] text-right">
                 {client.name}
               </div>
-              <div className="text-base text-gray-300 text-right">
+              <div className="text-base text-[var(--text-secondary)] text-right">
                 ایمیل: {client.email}
               </div>
             </div>
@@ -88,7 +88,7 @@ const ClientTableRow = ({
           </div>
         </div>
         {/* // جزئیات اضافی برای موبایل */}
-        <div className="mt-2 text-base text-gray-300 text-right">
+        <div className="mt-2 text-base text-[var(--text-secondary)] text-right">
           <div>شماره تلفن: {client.phoneNumber}</div>
           <div>کشور: {client.country}</div>
           {editingRow === client.id && (
@@ -97,7 +97,7 @@ const ClientTableRow = ({
                 ایمیل:
                 <input
                   type="text"
-                  className="bg-transparent text-white border border-gray-400 w-40 text-center text-xs mx-1"
+                  className="bg-transparent text-[var(--foreground)] border border-gray-400 w-40 text-center text-xs mx-1"
                   value={client.email || ""}
                   onChange={(e) => {
                     if (client.id !== undefined) {
@@ -110,7 +110,7 @@ const ClientTableRow = ({
                 شماره تلفن:
                 <input
                   type="text"
-                  className="bg-transparent text-white border border-gray-400 w-40 text-center text-xs mx-1"
+                  className="bg-transparent text-[var(--foreground)] border border-gray-400 w-40 text-center text-xs mx-1"
                   value={client.phoneNumber || ""}
                   onChange={(e) => {
                     if (client.id !== undefined) {
@@ -124,7 +124,7 @@ const ClientTableRow = ({
         </div>
       </td>
       {/* // نمایش نام و تصویر برای دسکتاپ */}
-      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base font-medium text-gray-300">
+      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base font-medium text-[var(--text-secondary)]">
         <div className="flex items-center justify-start">
           <Image
             src={client.image || "/fallback.png"}
@@ -137,11 +137,11 @@ const ClientTableRow = ({
         </div>
       </td>
       {/* // فیلد ایمیل با امکان ویرایش */}
-      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-gray-300 text-right">
+      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-[var(--text-secondary)] text-right">
         {editingRow === client.id ? (
           <input
             type="text"
-            className="bg-transparent text-white border border-gray-400 w-40 text-center text-xs mx-1"
+            className="bg-transparent text-[var(--foreground)] border border-gray-400 w-40 text-center text-xs mx-1"
             value={client.email || ""}
             onChange={(e) => {
               if (client.id !== undefined) {
@@ -153,11 +153,11 @@ const ClientTableRow = ({
           client.email
         )}
       </td>
-      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-gray-300 text-right">
+      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-[var(--text-secondary)] text-right">
         {editingRow === client.id ? (
           <input
             type="text"
-            className="bg-transparent text-white border border-gray-400 w-40 text-center text-xs mx-1"
+            className="bg-transparent text-[var(--foreground)] border border-gray-400 w-40 text-center text-xs mx-1"
             value={client.phoneNumber || ""}
             onChange={(e) => {
               if (client.id !== undefined) {
@@ -169,10 +169,10 @@ const ClientTableRow = ({
           client.phoneNumber
         )}
       </td>
-      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-gray-300 text-right">
+      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-[var(--text-secondary)] text-right">
         {client.country}
       </td>
-      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-gray-300 text-right ">
+      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-[var(--text-secondary)] text-right ">
         <button
           className="text-indigo-500 hover:text-indigo-300 ml-4"
           onClick={() =>
@@ -202,3 +202,5 @@ const ClientTableRow = ({
 
 // اکسپورت کامپوننت
 export default ClientTableRow;
+
+

@@ -20,7 +20,7 @@ const ClientTableHeader = () => (
       // ایجاد سلول هدر برای هر عنوان
       <th
         key={header}
-        className="px-3 md:px-6 py-2 md:py-3 text-right text-md font-medium text-gray-400 hidden md:table-cell"
+        className="px-3 md:px-6 py-2 md:py-3 text-right text-md font-medium text-[var(--text-secondary)] hidden md:table-cell"
       >
         {header}
       </th>
@@ -30,3 +30,4 @@ const ClientTableHeader = () => (
 
 // اکسپورت کامپوننت
 export default ClientTableHeader;
+

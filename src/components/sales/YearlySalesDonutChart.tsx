@@ -11,7 +11,7 @@ const renderCustomLabel = ({ x, y, value }: PieLabelRenderProps) => (
   <text
     x={x}
     y={y}
-    fill="#fff"
+    fill="var(--foreground)"
     textAnchor="middle"
     dominantBaseline="central"
     fontSize={14}
@@ -47,12 +47,12 @@ const YearlySalesDonutChart: React.FC = () => {
 
   return (
     <motion.div
-      className="bg-[#0A0A0A] shadow-2xl rounded-2xl p-6 border border-[#23272f] mx-2 md:mx-0 mt-8"
+      className="bg-[var(--component-bg)] shadow-2xl rounded-2xl p-6 border border-[#23272f] mx-2 md:mx-0 mt-8"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2, duration: 0.5 }}
     >
-      <h2 className="text-base md:text-2xl font-medium mb-4 text-gray-300 text-center md:text-right">
+      <h2 className="text-base md:text-2xl font-medium mb-4 text-[var(--text-secondary)] text-center md:text-right">
         مقایسه درآمد و سود سال جاری با سال‌های قبل
       </h2>
       <div className="flex flex-col md:flex-row gap-8 items-center justify-center">
@@ -127,3 +127,4 @@ const YearlySalesDonutChart: React.FC = () => {
 };
 
 export default YearlySalesDonutChart;
+

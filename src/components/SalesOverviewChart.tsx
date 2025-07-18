@@ -22,12 +22,12 @@ const SalesOverviewChart = () => {
 
   return (
     <motion.div
-      className="bg-[#0A0A0A] backdrop-blur-md shadow-lg rounded-xl p-4 md:p-6 border border-[#1f1f1f] mx-2 md:mx-0"
+      className="bg-[var(--component-bg)] backdrop-blur-md shadow-lg rounded-xl p-4 md:p-6 border border-[var(--border)] mx-2 md:mx-0"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2, duration: 0.5 }}
     >
-      <h2 className="text-base md:text-2xl font-medium mb-4 text-gray-300 text-center md:text-right">
+      <h2 className="text-base md:text-2xl font-medium mb-4 text-[var(--text-secondary)] text-center md:text-right">
         نمای کلی فروش
       </h2>
       <div className="h-64 md:h-80">
@@ -73,3 +73,5 @@ const SalesOverviewChart = () => {
 };
 
 export default SalesOverviewChart;
+
+

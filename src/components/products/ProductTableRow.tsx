@@ -35,7 +35,7 @@ const ProductTableRow = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1, duration: 0.3 }}
       className={`flex flex-col md:table-row mb-4 md:mb-0 border-b md:border-b-0 border-gray-700 md:border-none p-2 md:p-0  
-        ${editingRow === product.id ? "bg-[#2f2f2f] ring-gray-500" : ""}`}
+        ${editingRow === product.id ? "bg-[var(--editing-bg)] ring-gray-500" : ""}`}
     >
       {/* نمای موبایل (td برای موبایل قابل مشاهده است) */}
       <td className="md:hidden px-3 py-2">
@@ -50,10 +50,10 @@ const ProductTableRow = ({
               className="w-9 h-9 rounded-full"
             />
             <div className="mr-3">
-              <div className="text-base font-medium text-gray-300 text-right">
+              <div className="text-base font-medium text-[var(--text-secondary)] text-right">
                 {product.name}
               </div>
-              <div className="text-base text-gray-300 text-right">
+              <div className="text-base text-[var(--text-secondary)] text-right">
                 شناسه: {product.id}
               </div>
             </div>
@@ -92,7 +92,7 @@ const ProductTableRow = ({
         </div>
 
         {/* اطلاعات دیگر مانند دسته‌بندی، قیمت، موجودی، فروش */}
-        <div className="mt-2 text-base text-gray-300 text-right">
+        <div className="mt-2 text-base text-[var(--text-secondary)] text-right">
           <div>دسته‌بندی: {product.category}</div>
           {["قیمت", "موجودی", "فروش"].map((label) => {
             const fieldKey =
@@ -110,7 +110,7 @@ const ProductTableRow = ({
                 {editingRow === product.id ? (
                   <input
                     type="text"
-                    className="bg-transparent text-white border border-gray-400 w-20 text-center text-xs mx-1"
+                    className="bg-transparent text-[var(--foreground)] border border-gray-400 w-20 text-center text-xs mx-1"
                     value={product[fieldKey] as any}
                     onChange={(e) => {
                       if (product.id !== undefined) {
@@ -136,7 +136,7 @@ const ProductTableRow = ({
       </td>
 
       {/* نمایش اطلاعات در نسخه دسکتاپ */}
-      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base font-medium text-gray-300">
+      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base font-medium text-[var(--text-secondary)]">
         <div className="flex items-center justify-start">
           <Image
             src={product.image || "/fallback.png"}
@@ -148,19 +148,19 @@ const ProductTableRow = ({
           <div className="mr-4">{product.name}</div>
         </div>
       </td>
-      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-gray-300 text-right">
+      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-[var(--text-secondary)] text-right">
         {product.id}
       </td>
-      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-gray-300 text-right">
+      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-[var(--text-secondary)] text-right">
         {product.category}
       </td>
 
       {/* فیلد قیمت با امکان ویرایش */}
-      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-gray-300 text-right">
+      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-[var(--text-secondary)] text-right">
         {editingRow === product.id ? (
           <input
             type="text"
-            className="bg-transparent text-white border border-gray-400 w-20 text-center text-xs mx-1"
+            className="bg-transparent text-[var(--foreground)] border border-gray-400 w-20 text-center text-xs mx-1"
             value={product.price}
             onChange={(e) => {
               if (product.id !== undefined) {
@@ -174,11 +174,11 @@ const ProductTableRow = ({
       </td>
 
       {/* فیلد موجودی */}
-      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-gray-300 text-right">
+      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-[var(--text-secondary)] text-right">
         {editingRow === product.id ? (
           <input
             type="text"
-            className="bg-transparent text-white border border-gray-400 w-20 text-center text-xs mx-1"
+            className="bg-transparent text-[var(--foreground)] border border-gray-400 w-20 text-center text-xs mx-1"
             value={product.stock}
             onChange={(e) => {
               if (product.id !== undefined) {
@@ -192,11 +192,11 @@ const ProductTableRow = ({
       </td>
 
       {/* فیلد فروش */}
-      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-gray-300 text-right">
+      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-[var(--text-secondary)] text-right">
         {editingRow === product.id ? (
           <input
             type="text"
-            className="bg-transparent text-white border border-gray-400 w-20 text-center text-xs mx-1"
+            className="bg-transparent text-[var(--foreground)] border border-gray-400 w-20 text-center text-xs mx-1"
             value={product.sales}
             onChange={(e) => {
               if (product.id !== undefined) {
@@ -210,7 +210,7 @@ const ProductTableRow = ({
       </td>
 
       {/* دکمه‌های ویرایش/ذخیره و حذف در دسکتاپ */}
-      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-sm text-[var(--text-secondary)]">
         <div className="flex space-x-4 -mx-2">
           <button
             className="text-indigo-500 hover:text-indigo-300 mr-1 cursor-pointer"
@@ -245,3 +245,5 @@ const ProductTableRow = ({
 };
 
 export default ProductTableRow;
+
+

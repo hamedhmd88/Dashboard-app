@@ -6,14 +6,17 @@ import {
   Info,
   Mail,
   Menu,
+  Moon,
   Settings,
   ShoppingBag,
   ShoppingCart,
+  Sun,
   Users,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { SidebarItem } from "../../public/data/dataTypes";
+import { useTheme } from "@/components/ThemeProvider";
 import Link from "next/link";
 
 const ICON = {
@@ -28,6 +31,7 @@ const ICON = {
   Info,
 };
 function Sidebar() {
+  const { theme, toggleTheme } = useTheme();
   const [isSidebarOpen, setIssidebarOpen] = useState<boolean>(false);
   const [sidebarItems, setSidebarItems] = useState<SidebarItem[]>([]);
   const pathname = usePathname();
@@ -44,10 +48,10 @@ function Sidebar() {
         isSidebarOpen ? "w-64" : "w-22"
       }`}
     >
-      <div className="h-full bg-[#0A0A0A] backdrop-blur-md p-4 flex flex-col border-l border-[#2f2f2f]">
+      <div className="h-full bg-[var(--component-bg)] backdrop-blur-md p-4 flex flex-col border-l border-[var(--border)]">
         <button
           onClick={() => setIssidebarOpen(!isSidebarOpen)}
-          className=" p-2 rounded-full hover:bg-[#1F1F1F] transition-all max-w-fit cursor-pointer"
+          className=" p-2 rounded-full hover:bg-[var(--component-hover)] transition-all max-w-fit cursor-pointer"
         >
           <Menu size={24} />
         </button>
@@ -60,8 +64,8 @@ function Sidebar() {
             return (
               <Link key={name} href={href}>
                 <div
-                  className={`flex items-center p-4 text-sm font-medium rounded-lg hover:bg-[#1F1F1F] transition-all mb-2 group relative ${
-                    pathname === item.href ? "bg-[#1F1F1F]" : ""
+                  className={`flex items-center p-4 text-sm font-medium rounded-lg hover:bg-[var(--component-hover)] transition-all mb-2 group relative ${
+                    pathname === item.href ? "bg-[var(--component-hover)]" : ""
                   }`}
                 >
                   {IconComponent && (
@@ -79,7 +83,7 @@ function Sidebar() {
                       {name}
                     </span>
                   ) : (
-                    <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 bg-[#1F1F1F] text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity z-20 whitespace-nowrap">
+                    <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 bg-[var(--component-hover)] text-[var(--foreground)] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity z-20 whitespace-nowrap">
                       {name}
                     </span>
                   )}
@@ -88,9 +92,19 @@ function Sidebar() {
             );
           })}
         </nav>
+        <div className="mt-auto p-4">
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full hover:bg-[var(--component-hover)] transition-all max-w-fit cursor-pointer"
+          >
+            {theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
+          </button>
+        </div>
       </div>
     </div>
   );
 }
 
 export default Sidebar;
+
+

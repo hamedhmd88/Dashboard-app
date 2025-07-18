@@ -90,9 +90,9 @@ const OrderChart = () => {
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 0.4, duration: 0.6 }}
-      className="bg-[#0A0A0A] backdrop-blur-md shadow-lg rounded-xl p-4 md:p-6 border border-[#1f1f1f] mx-2 md:mx-0 text-right"
+      className="bg-[var(--component-bg)] backdrop-blur-md shadow-lg rounded-xl p-4 md:p-6 border border-[var(--border)] mx-2 md:mx-0 text-right"
     >
-      <h2 className="text-base md:text-xl font-semibold text-gray-300 mb-4 text-center md:text-right">
+      <h2 className="text-base md:text-xl font-semibold text-[var(--text-secondary)] mb-4 text-center md:text-right">
         وضعیت سفارش محصولات
       </h2>
       <div className="w-full h-64 md:h-80">
@@ -150,3 +150,4 @@ const OrderChart = () => {
 };
 
 export default OrderChart;
+

@@ -5,9 +5,9 @@ import admin from "../../public/images/admin.jpg";
 function Header() {
   return (
     <>
-      <header className=" bg-[#0A0A0A] shadow-lg border-[#1f1f1f] mx-4 sm:mx-6 lg:mx-8 mt-4 mb-2 rounded-lg">
+      <header className=" bg-[var(--component-bg)] shadow-lg border-[var(--border)] mx-4 sm:mx-6 lg:mx-8 mt-4 mb-2 rounded-lg">
         <div className=" max-w-7xl mx-auto py-4 px-4 sm:px-6 flex justify-between items-center">
-          <h1 className=" text-lg sm:text-xl lg:text-2xl font-semibold text-gray-300">
+          <h1 className=" text-lg sm:text-xl lg:text-2xl font-semibold text-[var(--foreground)]">
             داشبورد
           </h1>
           <div className=" flex items-center space-x-3 sm:space-x-6">
@@ -19,7 +19,7 @@ function Header() {
               className=" rounded-full shadow-md cursor-pointer"
             />
             <div className=" relative">
-              <Bell className=" w-5 sm:w6 h-5 text-gray-300 cursor-pointer hover:text-white transition-all duration-300" />
+              <Bell className=" w-5 sm:w6 h-5 text-[var(--text-secondary)] cursor-pointer hover:text-[var(--foreground)] transition-all duration-300" />
             </div>
             <div className=" flex items-center space-x-2 sm:space-x-3">
               <Image
@@ -27,9 +27,9 @@ function Header() {
                 alt="admin"
                 width={35}
                 height={35}
-                className=" rounded-full shadow-md cursor-pointer text-gray-600"
+                className=" rounded-full shadow-md cursor-pointer text-[var(--text-secondary)]"
               />
-              <span className=" hidden sm:block text-gray-300 text-sm">
+              <span className=" hidden sm:block text-[var(--text-secondary)] text-sm">
                 محمد حسین حسینی
               </span>
             </div>
@@ -41,3 +41,5 @@ function Header() {
 }
 
 export default Header;
+
+

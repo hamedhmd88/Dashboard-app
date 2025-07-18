@@ -143,13 +143,13 @@ const ITEMS_PER_PAGE = 4;
     // بازگشت JSX برای رندر کامپوننت
     return (
     <motion.div
-      className="bg-[#0A0A0A] backdrop-blur-md shadow-lg rounded-xl p-4 md:p-6 border border-[#1f1f1f] mx-2 md:mx-0 mb-8"
+      className="bg-[var(--component-bg)] backdrop-blur-md shadow-lg rounded-xl p-4 md:p-6 border border-[var(--border)] mx-2 md:mx-0 mb-8"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2, duration: 0.5 }}
     >
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4 md:gap-0">
-        <h2 className="text-lg md:text-xl font-semibold text-gray-300 text-center md:text-right">
+        <h2 className="text-lg md:text-xl font-semibold text-[var(--text-secondary)] text-center md:text-right">
           لیست مشتریان
         </h2>
       </div>
@@ -173,11 +173,11 @@ const ITEMS_PER_PAGE = 4;
         <table className="min-w-full divide-y divide-gray-700">
           <thead>
             <tr>
-              <th className="px-3 md:px-6 py-2 md:py-3 text-right text-md font-medium text-gray-400 hidden md:table-cell">نام</th>
-              <th className="px-3 md:px-6 py-2 md:py-3 text-right text-md font-medium text-gray-400 hidden md:table-cell">ایمیل</th>
-              <th className="px-3 md:px-6 py-2 md:py-3 text-right text-md font-medium text-gray-400 hidden md:table-cell">شماره تماس</th>
-              <th className="px-3 md:px-6 py-2 md:py-3 text-right text-md font-medium text-gray-400 hidden md:table-cell">کشور</th>
-              <th className="px-3 md:px-6 py-2 md:py-3 text-right text-md font-medium text-gray-400 hidden md:table-cell">عملیات</th>
+              <th className="px-3 md:px-6 py-2 md:py-3 text-right text-md font-medium text-[var(--text-secondary)] hidden md:table-cell">نام</th>
+              <th className="px-3 md:px-6 py-2 md:py-3 text-right text-md font-medium text-[var(--text-secondary)] hidden md:table-cell">ایمیل</th>
+              <th className="px-3 md:px-6 py-2 md:py-3 text-right text-md font-medium text-[var(--text-secondary)] hidden md:table-cell">شماره تماس</th>
+              <th className="px-3 md:px-6 py-2 md:py-3 text-right text-md font-medium text-[var(--text-secondary)] hidden md:table-cell">کشور</th>
+              <th className="px-3 md:px-6 py-2 md:py-3 text-right text-md font-medium text-[var(--text-secondary)] hidden md:table-cell">عملیات</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-500">
@@ -205,3 +205,4 @@ const ITEMS_PER_PAGE = 4;
 };
 
 export default ClientsTable;
+

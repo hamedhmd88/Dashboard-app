@@ -23,8 +23,8 @@ const Pagination = ({
         disabled={currentPage === 1} // اگر صفحه اول بود، دکمه غیرفعال شود
         className={`px-3 py-1 rounded-md border ${
           currentPage === 1
-            ? "text-gray-500 border-gray-700 cursor-not-allowed" // ظاهر دکمه غیرفعال
-            : "text-white border-gray-600 hover:bg-[#1F1F1F] cursor-pointer" // ظاهر دکمه فعال
+            ? "text-[var(--text-disabled)] border-gray-700 cursor-not-allowed" // ظاهر دکمه غیرفعال
+            : "text-[var(--foreground)] border-gray-600 hover:bg-[var(--component-hover)] cursor-pointer" // ظاهر دکمه فعال
         }`}
       >
         قبل
@@ -39,7 +39,7 @@ const Pagination = ({
             className={`px-3 py-1 rounded-md border ${
               currentPage === page
                 ? "bg-white text-black font-semibold" // صفحه فعال با ظاهر متفاوت
-                : "border-gray-600 text-gray-300 hover:bg-[#1F1F1F] cursor-pointer" // صفحات دیگر
+                : "border-gray-600 text-[var(--text-secondary)] hover:bg-[var(--component-hover)] cursor-pointer" // صفحات دیگر
             }`}
           >
             {page} {/* شماره صفحه */}
@@ -48,7 +48,7 @@ const Pagination = ({
       </div>
 
       {/* متن نمایش صفحه فعلی فقط در موبایل */}
-      <div className="md:hidden text-gray-300 font-medium px-2">
+      <div className="md:hidden text-[var(--text-secondary)] font-medium px-2">
         صفحه {currentPage} از {totalPages}
       </div>
 
@@ -58,8 +58,8 @@ const Pagination = ({
         disabled={currentPage === totalPages} // اگر در آخرین صفحه باشیم، غیرفعال شود
         className={`px-3 py-1 rounded-md border ${
           currentPage === totalPages
-            ? "text-gray-500 border-gray-700 cursor-not-allowed" // ظاهر دکمه غیرفعال
-            : "text-white border-gray-600 hover:bg-[#1F1F1F] cursor-pointer" // ظاهر دکمه فعال
+            ? "text-[var(--text-disabled)] border-gray-700 cursor-not-allowed" // ظاهر دکمه غیرفعال
+            : "text-[var(--foreground)] border-gray-600 hover:bg-[var(--component-hover)] cursor-pointer" // ظاهر دکمه فعال
         }`}
       >
         بعد
@@ -69,3 +69,5 @@ const Pagination = ({
 };
 
 export default Pagination; // خروجی گرفتن از کامپوننت
+
+

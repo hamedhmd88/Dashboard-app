@@ -25,23 +25,23 @@ const SalesProfitChart: React.FC<Props> = ({ salesRecords }) => {
 
   return (
     <motion.div
-      className="bg-[#0A0A0A] shadow-2xl rounded-2xl p-6 border border-[#23272f] mx-2 md:mx-0"
+      className="bg-[var(--component-bg)] shadow-2xl rounded-2xl p-6 border border-[var(--border)] mx-2 md:mx-0"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2, duration: 0.5 }}
     >
-      <h2 className="text-base md:text-2xl font-medium mb-4 text-gray-300 text-center md:text-right">
+      <h2 className="text-base md:text-2xl font-medium mb-4 text-[var(--text-secondary)] text-center md:text-right">
         نمودار سود و ضرر فروش
       </h2>
       <div className="h-72 md:h-96">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={chartData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#4b5563" />
-            <XAxis dataKey="date" stroke="#9ca3af" tick={{ fontSize: 12 }} />
-            <YAxis stroke="#9ca3af" tick={{ fontSize: 12, fill: "#9ca3af" }} width={60} />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+            <XAxis dataKey="date" stroke="var(--text-secondary)" tick={{ fontSize: 12, fill: "var(--text-secondary)" }} />
+            <YAxis stroke="var(--text-secondary)" tick={{ fontSize: 12, fill: "var(--text-secondary)" }} width={60} />
             <Tooltip
-              contentStyle={{ backgroundColor: "rgba(31, 41, 55, 0.8)", borderColor: "#4b5563", fontSize: "12px" }}
-              itemStyle={{ color: "#e5e7eb" }}
+              contentStyle={{ backgroundColor: "var(--component-bg)", borderColor: "var(--border)", fontSize: "12px", opacity: 0.8 }}
+              itemStyle={{ color: "var(--foreground)" }}
               formatter={(value: number, name: string, props) => {
                 // name can be 'سود' or 'ضرر' or dataKey
                 if (props && props.dataKey) {
@@ -58,7 +58,7 @@ const SalesProfitChart: React.FC<Props> = ({ salesRecords }) => {
                 <ul className="flex flex-row-reverse gap-6 justify-center mt-4">
                   {payload && payload.map((entry, index) => (
                     <li key={`item-${index}`} className="flex items-center">
-                      <span className="text-base text-gray-200 font-semibold">
+                      <span className="text-base text-[var(--foreground)] font-semibold">
                         {entry.dataKey === "profit" ? "سود" : entry.dataKey === "loss" ? "ضرر" : entry.value}
                       </span>
                       <span
@@ -79,4 +79,5 @@ const SalesProfitChart: React.FC<Props> = ({ salesRecords }) => {
   );
 };
 
-export default SalesProfitChart; 
+export default SalesProfitChart;
+
