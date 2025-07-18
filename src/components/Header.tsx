@@ -1,13 +1,18 @@
+'use client';
 import Image from "next/image";
 import IR from "../../public/images/IR.png";
-import { Bell } from "lucide-react";
+import { Bell, Menu } from "lucide-react";
+import { useSidebar } from "./SidebarContext";
 import admin from "../../public/images/admin.jpg";
 function Header() {
   return (
     <>
       <header className=" bg-[var(--component-bg)] shadow-lg border-[var(--border)] mx-4 sm:mx-6 lg:mx-8 mt-4 mb-2 rounded-lg">
         <div className=" max-w-7xl mx-auto py-4 px-4 sm:px-6 flex justify-between items-center">
-          <h1 className=" text-lg sm:text-xl lg:text-2xl font-semibold text-[var(--foreground)]">
+          <button className="md:hidden p-2 rounded-full hover:bg-[var(--component-hover)] transition-all max-w-fit cursor-pointer" onClick={useSidebar().toggleMobile}>
+            <Menu size={24} />
+          </button>
+          <h1 className=" text-lg sm:text-xl lg:text-2xl font-semibold text-[var(--foreground)] ml-auto md:ml-0">
             داشبورد
           </h1>
           <div className=" flex items-center space-x-3 sm:space-x-6">

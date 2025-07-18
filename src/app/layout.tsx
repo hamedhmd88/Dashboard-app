@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { SidebarProvider } from "@/components/SidebarContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,15 +33,17 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <ThemeProvider>
-          <div className=" flex h-screen overflow-hidden">
-            <Sidebar />
-            <div className=" flex flex-col flex-1 overflow-auto">
-              <div className=" max-w-7xl mx-auto w-full">
-                <Header />
-                <main>{children}</main>
+          <SidebarProvider>
+            <div className="relative flex h-screen overflow-hidden">
+              <Sidebar />
+              <div className="flex flex-col flex-1 overflow-auto md:ml-0">
+                <div className="max-w-7xl mx-auto w-full">
+                  <Header />
+                  <main>{children}</main>
+                </div>
               </div>
             </div>
-          </div>
+          </SidebarProvider>
         </ThemeProvider>
       </body>
     </html>
