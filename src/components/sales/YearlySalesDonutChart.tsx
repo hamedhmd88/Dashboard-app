@@ -31,8 +31,9 @@ const renderCustomLabel = ({ x, y, value }: PieLabelRenderProps) => (
     fontWeight="bold" // ضخامت فونت
     style={{ textShadow: "0 1px 4px #23272f" }} // سایه برای خوانایی بهتر
   >
-    {Number(value).toLocaleString()} // نمایش مقدار به صورت عددی با جداکننده
-    هزارگان
+    {Number(value).toLocaleString()} 
+    {/* // نمایش مقدار به صورت عددی با جداکننده
+    هزارگان */}
   </text>
 );
 

@@ -232,7 +232,7 @@
       "id": 1,
       "name": "علی رضایی",
       "email": "ali.rezaei@example.com",
-      "phoneNumber": "+1 415-678-9023",
+      "phoneNumber": "۰۹۱۲ ۱۲۳ ۴۵۶۷",
       "country": "ایران",
       "image": "/images/user1.jpg"
     },
@@ -240,7 +240,7 @@
       "id": 2,
       "name": "سارا محمدی",
       "email": "sara.mohammadi@example.com",
-      "phoneNumber": "+44 7911 123456",
+      "phoneNumber": "۰۹۳۵ ۷۸۹ ۶۵۴۳",
       "country": "ایران",
       "image": "/images/user2.jpg"
     },
@@ -248,7 +248,7 @@
       "id": 3,
       "name": "رضا احمدی",
       "email": "reza.ahmadi@example.com",
-      "phoneNumber": "+49 1523 4567890",
+      "phoneNumber": "۰۹۱۰ ۴۵۶ ۷۸۹۰",
       "country": "امارات",
       "image": "/images/user3.jpg"
     },
@@ -256,7 +256,7 @@
       "id": 4,
       "name": "مریم حسینی",
       "email": "maryam.hosseini@example.com",
-      "phoneNumber": "+91 98765 43210",
+      "phoneNumber": "۰۹۳۸ ۲۳۴ ۵۶۷۸",
       "country": "امارات",
       "image": "/images/user4.jpg"
     },
@@ -264,7 +264,7 @@
       "id": 5,
       "name": "حسین کاظمی",
       "email": "hossein.kazemi@example.com",
-      "phoneNumber": "+61 412 345 678",
+      "phoneNumber": "۰۹۱۳ ۳۴۵ ۶۷۸۹",
       "country": "ایران",
       "image": "/images/user5.jpg"
     },
@@ -272,7 +272,7 @@
       "id": 6,
       "name": "مریم حسینی",
       "email": "maryam.hosseini@example.com",
-      "phoneNumber": "+91 98765 43210",
+      "phoneNumber": "۰۹۲۱ ۹۸۷ ۶۵۴۳",
       "country": "امارات",
       "image": "/images/user4.jpg"
     }

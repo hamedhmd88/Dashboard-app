@@ -93,7 +93,12 @@ const ClientTableRow = ({
         </div>
         {/* // جزئیات اضافی برای موبایل */}
         <div className="mt-2 text-base text-[var(--text-secondary)] text-right">
-          <div>شماره تلفن: {client.phoneNumber}</div> {/* شماره تلفن */}
+          <div>
+            شماره تلفن:
+            <span style={{ direction: "ltr", unicodeBidi: "isolate", textAlign: "left", display: "inline-block", minWidth: "100px" }}>
+              {client.phoneNumber}
+            </span>
+          </div> {/* شماره تلفن */}
           <div>کشور: {client.country}</div> {/* کشور */}
           {editingRow === client.id && (
             <>
@@ -114,6 +119,7 @@ const ClientTableRow = ({
                 شماره تلفن:
                 <input
                   type="text"
+                  style={{ direction: "ltr", textAlign: "left" }}
                   className="bg-transparent text-[var(--foreground)] border border-gray-400 w-40 text-center text-xs mx-1"
                   value={client.phoneNumber || ""}
                   onChange={(e) => {
@@ -161,6 +167,7 @@ const ClientTableRow = ({
         {editingRow === client.id ? (
           <input
             type="text"
+            style={{ direction: "ltr", textAlign: "left" }}
             className="bg-transparent text-[var(--foreground)] border border-gray-400 w-40 text-center text-xs mx-1"
             value={client.phoneNumber || ""}
             onChange={(e) => {
@@ -170,7 +177,9 @@ const ClientTableRow = ({
             }}
           />
         ) : (
-          client.phoneNumber // نمایش شماره تلفن در حالت عادی
+          <span style={{ direction: "ltr", unicodeBidi: "isolate", textAlign: "left", display: "inline-block", minWidth: "100px" }}>
+            {client.phoneNumber}
+          </span>
         )}
       </td>
       <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-[var(--text-secondary)] text-right">

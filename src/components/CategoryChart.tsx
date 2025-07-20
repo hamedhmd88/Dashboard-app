@@ -77,7 +77,9 @@ const CategoryChart = () => {
     const anchor = cos >= 0 ? "end" : "start";
 
     return (
-      <g> // گروه SVG برای خط و متن.
+      <g>
+        {" "}
+        {/* گروه SVG برای خط و متن. */}
         {/* رسم خط راهنما از بخش نمودار به متن. */}
         <path d={`M${x1},${y1}L${x2},${y2}`} stroke={fill} fill="none" />
         {/* نمایش متن برچسب شامل نام و درصد گرد شده. */}
@@ -92,13 +94,14 @@ const CategoryChart = () => {
             fontSize: "15px", // اندازه فونت.
           }}
         >
-          {`${name} %${Math.round(percent * 100)}`} // محتوای برچسب: نام % درصد.
+          {`${name} %${Math.round(percent * 100)}`}{" "}
+          {/* محتوای برچسب: نام % درصد. */}
         </text>
       </g>
     );
   };
 
-    return (
+  return (
     // کانتینر اصلی کامپوننت با انیمیشن ورودی از پایین به بالا با استفاده از framer-motion.
     <motion.div
       initial={{ opacity: 0, y: 20 }} // حالت اولیه: نامرئی و پایین‌تر.
@@ -107,9 +110,8 @@ const CategoryChart = () => {
       className="bg-[var(--component-bg)] backdrop-blur-md shadow-lg rounded-xl p-4 md:p-6 border border-[var(--border)] mx-2 md:mx-0 text-right" // کلاس‌های Tailwind برای استایل: پس‌زمینه، بلور، سایه، گردی، پدینگ responsive، مرز و تراز متن راست.
     >
       {/* عنوان نمودار با استایل responsive برای اندازه و تراز. */}
-      <h2 className="text-base md:text-lg font-medium mb-4 text-[var(--text-secondary)] text-center md:text-right">
-        دسته بندی محصولات // عنوان: "دسته بندی محصولات".
-      </h2>
+      <h2 className="text-base md:text-2xl font-medium mb-4 text-[var(--text-secondary)] text-center md:text-right">
+دسته بندی محصولات      </h2>
       {/* div کانتینر برای نمودار با ارتفاع responsive (64 برای موبایل، 80 برای دسکتاپ). */}
       <div className="h-64 md:h-80">
         {/* کامپوننت ResponsiveContainer از Recharts برای تنظیم اندازه نمودار بر اساس کانتینر والد. */}
@@ -136,7 +138,8 @@ const CategoryChart = () => {
             </Pie>
             {/* تنظیمات Tooltip برای نمایش اطلاعات هنگام hover، با استایل سفارشی برای RTL و رنگ‌ها. */}
             <Tooltip
-              contentStyle={{ // استایل محتوای تولتیپ.
+              contentStyle={{
+                // استایل محتوای تولتیپ.
                 backgroundColor: "rgba(31, 41, 55, 0.8)", // پس‌زمینه نیمه‌شفاف تیره.
                 borderBlock: "#4b5563", // مرز بلوک.
                 borderRadius: "8px", // گردی مرز.
@@ -145,7 +148,8 @@ const CategoryChart = () => {
                 direction: "rtl", // جهت راست به چپ.
                 textAlign: "right", // تراز متن راست.
               }}
-              itemStyle={{ // استایل آیتم‌های داخل تولتیپ.
+              itemStyle={{
+                // استایل آیتم‌های داخل تولتیپ.
                 color: "#e5e7eb", // رنگ متن.
                 direction: "rtl", // جهت RTL.
                 fontFamily: "Vazirmatn, Tahoma, Arial, sans-serif", // فونت‌های پشتیبانی‌شده.
@@ -156,7 +160,8 @@ const CategoryChart = () => {
               iconType="circle" // نوع آیکون: دایره.
               layout="horizontal" // چیدمان افقی.
               align="center" // تراز مرکزی.
-              wrapperStyle={{ // استایل wrapper.
+              wrapperStyle={{
+                // استایل wrapper.
                 fontSize: 14, // اندازه فونت.
                 direction: "rtl", // RTL.
                 textAlign: "right", // تراز راست.
@@ -164,7 +169,9 @@ const CategoryChart = () => {
                 justifyContent: "center", // مرکزی کردن.
                 marginTop: "20px", // حاشیه بالا.
               }}
-              formatter={(value) => ( // فرمت‌کننده برای نمایش نام با حاشیه راست.
+              formatter={(
+                value // فرمت‌کننده برای نمایش نام با حاشیه راست.
+              ) => (
                 <span style={{ marginRight: 8, direction: "rtl" }}>
                   {value}
                 </span>
@@ -179,5 +186,3 @@ const CategoryChart = () => {
 
 // اکسپورت کامپوننت برای استفاده در سایر فایل‌ها.
 export default CategoryChart;
-
-
