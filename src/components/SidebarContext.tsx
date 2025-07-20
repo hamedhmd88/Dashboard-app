@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
 type SidebarContextType = {
   isMobileOpen: boolean;
@@ -13,10 +19,22 @@ const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
 export function SidebarProvider({ children }: { children: ReactNode }) {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [isDesktopOpen, setIsDesktopOpen] = useState(true); // Default open on desktop
+  const [isDesktopOpen, setIsDesktopOpen] = useState(false);
 
   const toggleMobile = () => setIsMobileOpen(!isMobileOpen);
   const toggleDesktop = () => setIsDesktopOpen(!isDesktopOpen);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isDesktop = window.innerWidth >= 768;
+      setIsDesktopOpen(isDesktop);
+      setIsMobileOpen(false);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <SidebarContext.Provider
