@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from "react";
 
 type SidebarContextType = {
   isMobileOpen: boolean;
@@ -19,7 +19,9 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
   const toggleDesktop = () => setIsDesktopOpen(!isDesktopOpen);
 
   return (
-    <SidebarContext.Provider value={{ isMobileOpen, toggleMobile, isDesktopOpen, toggleDesktop }}>
+    <SidebarContext.Provider
+      value={{ isMobileOpen, toggleMobile, isDesktopOpen, toggleDesktop }}
+    >
       {children}
     </SidebarContext.Provider>
   );
@@ -28,7 +30,7 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
 export function useSidebar() {
   const context = useContext(SidebarContext);
   if (undefined === context) {
-    throw new Error('useSidebar must be used within a SidebarProvider');
+    throw new Error("useSidebar must be used within a SidebarProvider");
   }
   return context;
 }

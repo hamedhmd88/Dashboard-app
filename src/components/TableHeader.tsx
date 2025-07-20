@@ -23,5 +23,4 @@ const TableHeader = () => (
   </tr>
 );
 
-export default TableHeader; 
-
+export default TableHeader;

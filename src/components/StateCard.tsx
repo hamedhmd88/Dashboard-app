@@ -17,12 +17,12 @@ function StateCard({ name, icon: Icon, value }: StateCardProps) {
           {Icon && <Icon size={30} className="ml-4" />}
           <span className="ml-2 text-lg">{name}</span>
         </span>
-        <p className=" mt-1 text-3xl font-semibold text-[var(--foreground)]">{value}</p>
+        <p className=" mt-1 text-3xl font-semibold text-[var(--foreground)]">
+          {value}
+        </p>
       </div>
     </motion.div>
   );
 }
 
 export default StateCard;
-
-
