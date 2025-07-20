@@ -1,54 +1,66 @@
-"use client";
-import React, { useEffect, useMemo, useState } from "react";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { motion } from "framer-motion";
-import { Product } from "../../../public/data/dataTypes";
-import ProductSearchInput from "./ProductSearchInput";
-import ProductCategoryFilter from "./ProductCategoryFilter";
-import Pagination from "../Pagination";
-import ProductTableRow from "./ProductTableRow";
-import TableHeader from "../TableHeader";
+// این کامپوننت جدول محصولات را نمایش می‌دهد و امکانات جستجو، فیلتر، ویرایش، حذف و صفحه‌بندی را فراهم می‌کند
+"use client"; // این فایل یک کامپوننت کلاینتی است (در Next.js)
+import React, { useEffect, useMemo, useState } from "react"; // ایمپورت ری‌اکت و هوک‌های مورد نیاز
+import { useSearchParams, useRouter, usePathname } from "next/navigation"; // هوک‌های ناوبری و مدیریت پارامترهای جستجو در Next.js
+import { motion } from "framer-motion"; // برای انیمیشن دادن به کامپوننت
+import { Product } from "../../../public/data/dataTypes"; // نوع داده محصول
+import ProductSearchInput from "./ProductSearchInput"; // کامپوننت ورودی جستجوی محصول
+import ProductCategoryFilter from "./ProductCategoryFilter"; // کامپوننت فیلتر دسته‌بندی محصول
+import Pagination from "../Pagination"; // کامپوننت صفحه‌بندی
+import ProductTableRow from "./ProductTableRow"; // کامپوننت ردیف جدول محصول
+import TableHeader from "../TableHeader"; // کامپوننت هدر جدول
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 4; // تعداد آیتم‌ها در هر صفحه
 
 const ProductsTable = () => {
+  // تعریف state برای لیست محصولات
   const [products, setProducts] = useState<Product[]>([]);
+  // state برای نگهداری ردیف در حال ویرایش (id یا null)
   const [editingRow, setEditingRow] = useState<number | string | null>(null);
+  // گرفتن پارامترهای جستجو از URL
   const searchParams = useSearchParams();
+  // گرفتن router برای تغییر مسیر
   const router = useRouter();
+  // گرفتن مسیر فعلی
   const pathname = usePathname();
 
+  // state برای عبارت جستجو، مقدار اولیه از پارامتر URL
   const [searchTerm, setSearchTerm] = useState<string>(searchParams.get("search") || "");
+  // state برای دسته‌بندی انتخاب شده، مقدار اولیه از پارامتر URL
   const [category, setCategory] = useState<string>(searchParams.get("category") || "");
+  // state برای شماره صفحه فعلی
   const [currentPage, setCurrentPage] = useState<number>(1);
 
+  // گرفتن لیست محصولات از فایل json هنگام اولین رندر
   useEffect(() => {
-    fetch("/data/data.json")
-      .then((res) => res.json())
-      .then((data) => setProducts(data.products));
-  }, []);
+    fetch("/data/data.json") // درخواست گرفتن داده‌ها
+      .then((res) => res.json()) // تبدیل به json
+      .then((data) => setProducts(data.products)); // ذخیره محصولات در state
+  }, []); // فقط یک بار اجرا می‌شود
 
+  // تابع به‌روزرسانی پارامتر جستجو در URL
   const updateSearchParam = (term: string) => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParams.toString()); // کپی پارامترها
     if (term) {
-      params.set("search", term);
+      params.set("search", term); // اگر مقدار دارد، ست کن
     } else {
-      params.delete("search");
+      params.delete("search"); // اگر خالی است، حذف کن
     }
-    router.push(`${pathname}?${params.toString()}`);
+    router.push(`${pathname}?${params.toString()}`); // تغییر URL
   };
 
+  // تابع به‌روزرسانی پارامتر دسته‌بندی در URL
   const updateCategoryParam = (cat: string) => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParams.toString()); // کپی پارامترها
     if (cat) {
-      params.set("category", cat);
+      params.set("category", cat); // اگر مقدار دارد، ست کن
     } else {
-      params.delete("category");
+      params.delete("category"); // اگر خالی است، حذف کن
     }
-    router.push(`${pathname}?${params.toString()}`);
+    router.push(`${pathname}?${params.toString()}`); // تغییر URL
   };
 
-  // تابعی برای شروع ویرایش یک ردیف خاص در جدول
+  // تابع شروع ویرایش یک ردیف خاص
   const handleEditClick = (id: number | string): void => {
     // مقدار شناسه ردیف در حال ویرایش را ذخیره می‌کنیم
     setEditingRow(id);
@@ -131,6 +143,7 @@ const ProductsTable = () => {
     }
   };
 
+  // رندر کامپوننت
   return (
     <motion.div
       className="bg-[var(--component-bg)] backdrop-blur-md shadow-lg rounded-xl p-4 md:p-6 border border-[var(--border)] mx-2 md:mx-0 mb-8"
@@ -138,62 +151,64 @@ const ProductsTable = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2, duration: 0.5 }}
     >
+      {/* هدر جدول */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4 md:gap-0">
         <h2 className="text-lg md:text-xl font-semibold text-[var(--text-secondary)] text-center md:text-right">
           لیست محصولات
         </h2>
       </div>
 
+      {/* بخش جستجو و فیلتر */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-4">
         <ProductSearchInput
-          value={searchTerm}
+          value={searchTerm} // مقدار جستجو
           onChange={(val) => {
-            setSearchTerm(val);
-            updateSearchParam(val);
-            setCurrentPage(1);
+            setSearchTerm(val); // تغییر مقدار جستجو
+            updateSearchParam(val); // به‌روزرسانی پارامتر URL
+            setCurrentPage(1); // بازگشت به صفحه اول
           }}
         />
         <ProductCategoryFilter
-          value={category}
+          value={category} // مقدار دسته‌بندی
           onChange={(val) => {
-            setCategory(val);
-            updateCategoryParam(val);
-            setCurrentPage(1);
+            setCategory(val); // تغییر مقدار دسته‌بندی
+            updateCategoryParam(val); // به‌روزرسانی پارامتر URL
+            setCurrentPage(1); // بازگشت به صفحه اول
           }}
         />
       </div>
 
+      {/* جدول محصولات */}
       <div className=" mt-4 overflow-clip">
         <table className="min-w-full divide-y divide-gray-700">
           <thead>
             <TableHeader />
           </thead>
           <tbody className="divide-y divide-gray-500">
+            {/* نمایش ردیف‌های محصولات */}
             {paginatedProducts.map((product) => (
               <ProductTableRow
-                key={product.id}
-                product={product}
-                editingRow={editingRow}
-                handleEditClick={handleEditClick}
-                handleSaveClick={handleSaveClick}
-                handleChange={handleChange}
-                handleDeleteProduct={handleDeleteProduct}
+                key={product.id} // کلید یکتا
+                product={product} // اطلاعات محصول
+                editingRow={editingRow} // ردیف در حال ویرایش
+                handleEditClick={handleEditClick} // تابع شروع ویرایش
+                handleSaveClick={handleSaveClick} // تابع پایان ویرایش
+                handleChange={handleChange} // تابع تغییر مقدار
+                handleDeleteProduct={handleDeleteProduct} // تابع حذف محصول
               />
             ))}
           </tbody>
         </table>
       </div>
 
-      {/* pagination */}
+      {/* صفحه‌بندی */}
       <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
+        currentPage={currentPage} // شماره صفحه فعلی
+        totalPages={totalPages} // تعداد کل صفحات
+        onPageChange={handlePageChange} // تابع تغییر صفحه
       />
     </motion.div>
   );
 };
 
-export default ProductsTable;
-
-
+export default ProductsTable; // خروجی کامپوننت
