@@ -1,4 +1,5 @@
 import React from "react";
+import { useTheme } from "../ThemeProvider";
 import { Edit, Save, Trash2 } from "lucide-react";
 import { Order } from "../../../public/data/dataTypes";
 import { motion } from "framer-motion";
@@ -14,10 +15,14 @@ interface OrderTableRowProps {
 
 const getStatusClass = (status: string) => {
   switch (status) {
-    case "تحویل داده شده": return "bg-green-800";
-    case "لغو شده": return "bg-red-800";
-    case "در انتظار": return "bg-yellow-800";
-    default: return "bg-gray-800";
+    case "تحویل داده شده":
+      return "bg-green-800";
+    case "لغو شده":
+      return "bg-red-800";
+    case "در انتظار":
+      return "bg-yellow-800";
+    default:
+      return "bg-gray-800";
   }
 };
 
@@ -29,13 +34,17 @@ const OrderTableRow = ({
   handleChange,
   handleDeleteOrder,
 }: OrderTableRowProps) => {
+  const { theme } = useTheme();
+
   return (
     <motion.tr
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1, duration: 0.3 }}
       className={`flex flex-col md:table-row mb-4 md:mb-0 border-b md:border-b-0 border-gray-700 md:border-none p-2 md:p-0  
-        ${editingRow === order.id ? "bg-[var(--editing-bg)] ring-gray-500" : ""}`}
+        ${
+          editingRow === order.id ? "bg-[var(--editing-bg)] ring-gray-500" : ""
+        }`}
     >
       {/* Mobile view */}
       <td className="md:hidden px-3 py-2">
@@ -83,38 +92,52 @@ const OrderTableRow = ({
           </div>
         </div>
         <div className="mt-2 text-base text-[var(--text-secondary)] text-right">
-          <div>جمع: {editingRow === order.id ? (
-            <input
-              type="text"
-              className="bg-transparent text-[var(--foreground)] border border-gray-400 w-20 text-center text-xs mx-1"
-              value={order.total}
-              onChange={(e) => {
-                if (order.id !== undefined) {
-                  handleChange(order.id, "total", e.target.value);
-                }
-              }}
-            />
-          ) : (
-            `${Number(order.total).toLocaleString("fa-IR")} تومان`
-          )}</div>
-          <div>وضعیت: {editingRow === order.id ? (
-            <select
-              value={order.status}
-              onChange={(e) => {
-                if (order.id !== undefined) {
-                  handleChange(order.id, "status", e.target.value);
-                }
-              }}
-              className="bg-[var(--component-bg)] text-[var(--foreground)] border border-gray-400 text-xs mx-1"
-            >
-              <option value="در انتظار">در انتظار</option>
-              <option value="در حال پردازش">در حال پردازش</option>
-              <option value="لغو شده">لغو شده</option>
-              <option value="تحویل داده شده">تحویل داده شده</option>
-            </select>
-          ) : (
-            <span className={`text-[var(--foreground)] px-2 py-1 rounded ${getStatusClass(order.status || "")}`}>{order.status}</span>
-          )}</div>
+          <div>
+            جمع:{" "}
+            {editingRow === order.id ? (
+              <input
+                type="text"
+                className="bg-transparent text-[var(--foreground)] border border-gray-400 w-20 text-center text-xs mx-1"
+                value={order.total}
+                onChange={(e) => {
+                  if (order.id !== undefined) {
+                    handleChange(order.id, "total", e.target.value);
+                  }
+                }}
+              />
+            ) : (
+              `${Number(order.total).toLocaleString("fa-IR")} تومان`
+            )}
+          </div>
+          <div>
+            وضعیت:{" "}
+            {editingRow === order.id ? (
+              <select
+                value={order.status}
+                onChange={(e) => {
+                  if (order.id !== undefined) {
+                    handleChange(order.id, "status", e.target.value);
+                  }
+                }}
+                className="bg-[var(--component-bg)] text-[var(--foreground)] border border-gray-400 text-xs mx-1"
+              >
+                <option value="در انتظار">در انتظار</option>
+                <option value="در حال پردازش">در حال پردازش</option>
+                <option value="لغو شده">لغو شده</option>
+                <option value="تحویل داده شده">تحویل داده شده</option>
+              </select>
+            ) : (
+              <span
+                className={`px-2 py-1 rounded ${getStatusClass(
+                  order.status || ""
+                )} ${
+                  theme === "light" ? "text-white" : "text-[var(--foreground)]"
+                }`}
+              >
+                {order.status}
+              </span>
+            )}
+          </div>
           <div>کشور: {order.country}</div>
         </div>
       </td>
@@ -125,7 +148,9 @@ const OrderTableRow = ({
       </td>
       <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-[var(--text-secondary)] text-right">
         <div>{order.client}</div>
-        <div className="text-sm text-[var(--text-secondary)]">{order.email}</div>
+        <div className="text-sm text-[var(--text-secondary)]">
+          {order.email}
+        </div>
       </td>
       <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-[var(--text-secondary)] text-right">
         {editingRow === order.id ? (
@@ -159,7 +184,15 @@ const OrderTableRow = ({
             <option value="تحویل داده شده">تحویل داده شده</option>
           </select>
         ) : (
-          <span className={`text-[var(--foreground)] px-2 py-1 rounded ${getStatusClass(order.status || "")}`}>{order.status}</span>
+          <span
+            className={`px-2 py-1 rounded ${getStatusClass(
+              order.status || ""
+            )} ${
+              theme === "light" ? "text-white" : "text-[var(--foreground)]"
+            }`}
+          >
+            {order.status}
+          </span>
         )}
       </td>
       <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-base text-[var(--text-secondary)] text-right">
@@ -177,11 +210,7 @@ const OrderTableRow = ({
                 : undefined
             }
           >
-            {editingRow === order.id ? (
-              <Save size={18} />
-            ) : (
-              <Edit size={18} />
-            )}
+            {editingRow === order.id ? <Save size={18} /> : <Edit size={18} />}
           </button>
           <button
             className="text-red-500 hover:text-red-300 cursor-pointer"
@@ -200,4 +229,3 @@ const OrderTableRow = ({
 };
 
 export default OrderTableRow;
-

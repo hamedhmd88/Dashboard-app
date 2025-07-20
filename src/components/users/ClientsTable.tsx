@@ -6,6 +6,7 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { Client } from "../../../public/data/dataTypes";
 import ClientSearchInput from "./ClientSearchInput";
 import Pagination from "../Pagination";
@@ -24,10 +25,39 @@ const ITEMS_PER_PAGE = 4;
     const [editingRow, setEditingRow] = useState<number | null>(null);
     // تعریف حالت برای عبارت جستجو
     const [searchTerm, setSearchTerm] = useState<string>("");
-    // تعریف حالت برای صفحه فعلی
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [selectedCountry, setSelectedCountry] = useState<string>("");
 
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const pathname = usePathname();
+
+    useEffect(() => {
+      const search = searchParams.get("search") || "";
+      const country = searchParams.get("country") || "";
+      setSearchTerm(search);
+      setSelectedCountry(country);
+    }, [searchParams]);
+
+    const updateSearchParam = (term: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (term) {
+        params.set("search", term);
+      } else {
+        params.delete("search");
+      }
+      router.push(`${pathname}?${params.toString()}`);
+    };
+
+    const updateCountryParam = (country: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (country) {
+        params.set("country", country);
+      } else {
+        params.delete("country");
+      }
+      router.push(`${pathname}?${params.toString()}`);
+    };
     /**
      * هوک برای واکشی داده‌ها هنگام بارگذاری کامپوننت.
      */
@@ -158,6 +188,7 @@ const ITEMS_PER_PAGE = 4;
           value={searchTerm}
           onChange={(val) => {
             setSearchTerm(val);
+            updateSearchParam(val);
             setCurrentPage(1);
           }}
         />
@@ -165,6 +196,7 @@ const ITEMS_PER_PAGE = 4;
           value={selectedCountry}
           onChange={(val) => {
             setSelectedCountry(val);
+            updateCountryParam(val);
             setCurrentPage(1);
           }}
         />

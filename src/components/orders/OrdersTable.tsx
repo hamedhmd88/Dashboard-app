@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Order } from "../../../public/data/dataTypes";
 import OrderSearchInput from "./OrderSearchInput";
@@ -13,9 +14,14 @@ const ITEMS_PER_PAGE = 4;
 const OrdersTable = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [editingRow, setEditingRow] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const [status, setStatus] = useState<string>("");
-  const [country, setCountry] = useState<string>("");
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const [searchTerm, setSearchTerm] = useState<string>(searchParams.get("search") || "");
+  const [status, setStatus] = useState<string>(searchParams.get("status") || "");
+  const [country, setCountry] = useState<string>(searchParams.get("country") || "");
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
@@ -23,6 +29,36 @@ const OrdersTable = () => {
       .then((res) => res.json())
       .then((data) => setOrders(data.orders));
   }, []);
+
+  const updateSearchParam = (term: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (term) {
+      params.set("search", term);
+    } else {
+      params.delete("search");
+    }
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
+  const updateStatusParam = (stat: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (stat) {
+      params.set("status", stat);
+    } else {
+      params.delete("status");
+    }
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
+  const updateCountryParam = (cnt: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (cnt) {
+      params.set("country", cnt);
+    } else {
+      params.delete("country");
+    }
+    router.push(`${pathname}?${params.toString()}`);
+  };
 
   const handleEditClick = (id: string): void => {
     setEditingRow(id);
@@ -104,6 +140,7 @@ const OrdersTable = () => {
           value={searchTerm}
           onChange={(val) => {
             setSearchTerm(val);
+            updateSearchParam(val);
             setCurrentPage(1);
           }}
         />
@@ -111,6 +148,7 @@ const OrdersTable = () => {
           value={status}
           onChange={(val) => {
             setStatus(val);
+            updateStatusParam(val);
             setCurrentPage(1);
           }}
         />
@@ -118,6 +156,7 @@ const OrdersTable = () => {
           value={country}
           onChange={(val) => {
             setCountry(val);
+            updateCountryParam(val);
             setCurrentPage(1);
           }}
         />

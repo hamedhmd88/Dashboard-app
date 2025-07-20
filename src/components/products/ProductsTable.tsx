@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Product } from "../../../public/data/dataTypes";
 import ProductSearchInput from "./ProductSearchInput";
@@ -13,8 +14,12 @@ const ITEMS_PER_PAGE = 4;
 const ProductsTable = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [editingRow, setEditingRow] = useState<number | string | null>(null);
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const [searchTerm, setSearchTerm] = useState<string>(searchParams.get("search") || "");
+  const [category, setCategory] = useState<string>(searchParams.get("category") || "");
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
@@ -22,6 +27,26 @@ const ProductsTable = () => {
       .then((res) => res.json())
       .then((data) => setProducts(data.products));
   }, []);
+
+  const updateSearchParam = (term: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (term) {
+      params.set("search", term);
+    } else {
+      params.delete("search");
+    }
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
+  const updateCategoryParam = (cat: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (cat) {
+      params.set("category", cat);
+    } else {
+      params.delete("category");
+    }
+    router.push(`${pathname}?${params.toString()}`);
+  };
 
   // تابعی برای شروع ویرایش یک ردیف خاص در جدول
   const handleEditClick = (id: number | string): void => {
@@ -123,20 +148,16 @@ const ProductsTable = () => {
         <ProductSearchInput
           value={searchTerm}
           onChange={(val) => {
-            // ذخیره مقدار جستجوی جدید در state
             setSearchTerm(val);
-            // برگرداندن به صفحه اول: برای جلوگیری از نمایش نتایج خالی در صفحات بالا
-            // و همچنین بهبود تجربه کاربری (نمایش نتایج از ابتدا)
+            updateSearchParam(val);
             setCurrentPage(1);
           }}
         />
         <ProductCategoryFilter
           value={category}
           onChange={(val) => {
-            // ذخیره دسته‌بندی انتخاب‌شده
             setCategory(val);
-            // با هر فیلتر جدید، از صفحه اول نتایج رو شروع کن
-            // چون ممکنه در صفحات بعدی هیچ نتیجه‌ای برای فیلتر انتخابی وجود نداشته باشه
+            updateCategoryParam(val);
             setCurrentPage(1);
           }}
         />
