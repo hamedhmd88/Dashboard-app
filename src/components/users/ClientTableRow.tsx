@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Edit, Save, Trash2 } from "lucide-react";
 import { Client } from "../../../public/data/dataTypes";
 import { motion } from "framer-motion";
+import { useTheme } from "../ThemeProvider";
 
 // اینترفیس پراپس کامپوننت
 interface ClientTableRowProps {
@@ -28,14 +29,15 @@ const ClientTableRow = ({
   handleChange,
   handleDeleteClient,
 }: ClientTableRowProps) => {
+  const { theme } = useTheme();
   return (
     // ردیف جدول با انیمیشن
     <motion.tr
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1, duration: 0.3 }}
-      className={`flex flex-col md:table-row mb-4 md:mb-0 border-b md:border-b-0 border-gray-700 md:border-none p-2 md:p-0  
-        ${editingRow === client.id ? "bg-[var(--editing-bg)] ring-gray-500" : ""}`}
+      className={`flex flex-col md:table-row mb-4 md:mb-0 border-b md:border-b-0 border-gray-700 md:border-none p-2 md:p-0 hover:bg-[var(--component-hover)] rounded-lg
+        ${editingRow === client.id ? "bg-[var(--editing-bg)] ring-gray-500" : ""} `}
     >
       {/* // نمایش برای موبایل */}
       <td className="md:hidden px-3 py-2">

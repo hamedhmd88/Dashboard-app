@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Edit, Save, Trash2 } from "lucide-react"; // آیکون‌ها
 import { Product } from "../../../public/data/dataTypes"; // نوع داده‌ی محصول
 import { motion } from "framer-motion"; // برای انیمیشن
+import { useTheme } from "../ThemeProvider";
 
 // تعریف پراپرتی‌های مورد انتظار از کامپوننت
 interface ProductTableRowProps {
@@ -28,14 +29,15 @@ const ProductTableRow = ({
   handleChange,
   handleDeleteProduct,
 }: ProductTableRowProps) => {
+  const { theme } = useTheme();
   return (
     // استفاده از framer-motion برای انیمیشن هنگام رندر سطر جدول
     <motion.tr
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1, duration: 0.3 }}
-      className={`flex flex-col md:table-row mb-4 md:mb-0 border-b md:border-b-0 border-gray-700 md:border-none p-2 md:p-0  
-        ${editingRow === product.id ? "bg-[var(--editing-bg)] ring-gray-500" : ""}`}
+      className={`flex flex-col md:table-row mb-4 md:mb-0 border-b md:border-b-0 border-gray-700 md:border-none p-2 md:p-0  hover:bg-[var(--component-hover)] rounded-lg 
+        ${editingRow === product.id ? "bg-[var(--editing-bg)] ring-gray-500" : ""} `}
     >
       {/* نمای موبایل (td برای موبایل قابل مشاهده است) */}
       <td className="md:hidden px-3 py-2">

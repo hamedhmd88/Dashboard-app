@@ -41,7 +41,7 @@ const OrderTableRow = ({
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1, duration: 0.3 }}
-      className={`flex flex-col md:table-row mb-4 md:mb-0 border-b md:border-b-0 border-gray-700 md:border-none p-2 md:p-0  
+      className={`flex flex-col md:table-row mb-4 md:mb-0 border-b md:border-b-0 border-gray-700 md:border-none p-2 md:p-0 hover:bg-[var(--component-hover)] rounded-lg 
         ${
           editingRow === order.id ? "bg-[var(--editing-bg)] ring-gray-500" : ""
         }`}
