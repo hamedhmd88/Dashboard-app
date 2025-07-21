@@ -5,7 +5,7 @@ This project is a **modern, responsive dashboard application** built using **Nex
 ---
 
 ## Live Demo
-You can check out the live demo of the project at the following link : [Dashboard](https://dashboard-app-seven-nu.vercel.app/)
+You can check out the live demo of the project at the following link : [Dashboard](https://dashboard-app-hazel-zeta.vercel.app/)
 
 ---
 
