@@ -45,6 +45,7 @@ cd your-dashboard
 npm install
 # or
 yarn install
+```
 
 ## 📸 Sample Screenshot
 
