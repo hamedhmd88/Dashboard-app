@@ -79,12 +79,12 @@ function Sidebar() {
       )}
       {/* کانتینر اصلی سایدبار */}
       <div
-        className={`fixed md:relative top-0 right-0 h-full transition-all duration-300 ease-in-out flex-shrink-0 z-50 bg-[var(--component-bg)] backdrop-blur-md p-4 flex flex-col border-l border-[var(--border)] overflow-y-auto ${
+        className={`fixed md:relative top-0 right-0 h-full transition-all duration-300 ease-in-out flex-shrink-0 z-50 bg-[var(--component-bg)] backdrop-blur-md p-4 flex flex-col border-l border-[var(--border)] ${
           isMobileOpen || isDesktopOpen
-            ? "w-64 translate-x-0"
+            ? "w-64 translate-x-0 overflow-y-auto"
             : "w-0 translate-x-full md:w-20 md:translate-x-0"
         } ${
-          isDesktopOpen ? "md:w-64" : "md:w-20"
+          isDesktopOpen ? "md:w-64 overflow-y-auto" : "md:w-20"
         } overflow-hidden md:overflow-visible`}
       >
         {/* دکمه باز/بسته کردن سایدبار در دسکتاپ */}

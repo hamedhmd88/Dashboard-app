@@ -285,8 +285,7 @@
     { "name": "سفارشات", "icon": "ShoppingCart", "href": "/orders" },
     { "name": "تنظیمات", "icon": "Settings", "href": "" },
     { "name": "پیام‌ها", "icon": "Mail", "href": "" },
-    { "name": "اعلان‌ها", "icon": "Bell", "href": "" },
-    { "name": "راهنما", "icon": "Info", "href": "" }
+    { "name": "اعلان‌ها", "icon": "Bell", "href": "" }
   ],
   "salesRecords": [
     {
