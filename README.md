@@ -4,6 +4,11 @@ This project is a **modern, responsive dashboard application** built using **Nex
 
 ---
 
+## Live Demo
+You can check out the live demo of the project at the following link : [Dashboard](https://dashboard-app-eight-roan.vercel.app/)
+
+---
+
 ## ✨ Features
 
 - ⚙️ Built with **Next.js 15** and **TypeScript**
@@ -45,6 +50,7 @@ cd your-dashboard
 npm install
 # or
 yarn install
+```
 
 ## 📸 Sample Screenshot
 
