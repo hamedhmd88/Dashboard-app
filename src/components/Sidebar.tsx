@@ -85,7 +85,7 @@ function Sidebar() {
             : "w-0 translate-x-full md:w-20 md:translate-x-0"
         } ${
           isDesktopOpen ? "md:w-64" : "md:w-20"
-        }`}
+        } overflow-hidden md:overflow-visible`}
       >
         {/* دکمه باز/بسته کردن سایدبار در دسکتاپ */}
         <button
