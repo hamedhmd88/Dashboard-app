@@ -135,7 +135,7 @@ function Header() {
                     </div>
                   </div>
                 ) : (
-                  <div className="absolute right-0 mt-2 w-64 bg-[var(--component-bg)] border border-[var(--border)] rounded-lg shadow-lg z-50">
+                  <div className="absolute -left-3/4 mt-2 w-64 bg-[var(--component-bg)] border border-[var(--border)] rounded-lg shadow-lg z-50">
                     {dropdownContent}
                   </div>
                 ))}
