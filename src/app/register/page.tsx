@@ -4,8 +4,10 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTheme } from "@/components/ThemeProvider";
 import { Eye, EyeOff } from "lucide-react";
+import { useUser } from "@/components/UserContext";
 
 function Register() {
+  const { setUser } = useUser();
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -26,6 +28,7 @@ function Register() {
     setLoading(true);
     // Simulate API call
     setTimeout(() => {
+      setUser({ fullName: `${name} ${lastName}` });
       setLoading(false);
       router.push("/");
     }, 2000);

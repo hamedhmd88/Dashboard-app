@@ -6,7 +6,10 @@ import { useState, useEffect } from "react";
 import { useSidebar } from "./SidebarContext";
 import admin from "../../public/images/admin.jpg";
 import Link from "next/link";
+import { LogIn } from "lucide-react";
+import { useUser } from "./UserContext";
 function Header() {
+  const { user } = useUser();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [messages, setMessages] = useState([
     { sender: "علی احمدی", preview: "سلام، سفارش جدید...", date: "۱۴۰۲/۰۸/۱۰" },
@@ -137,22 +140,26 @@ function Header() {
                   </div>
                 ))}
             </div>
-            <Link href="/register">
-              <div className=" flex items-center space-x-2 sm:space-x-3 cursor-pointer">
+            {user ? (
+              <div className="flex items-center space-x-2 sm:space-x-3">
                 <Image
                   src={admin}
                   alt="admin"
                   width={35}
                   height={35}
-                  className=" rounded-full shadow-md text-[var(--text-secondary)]"
+                  className="rounded-full shadow-md"
                 />
-                <span className=" hidden sm:block text-[var(--text-secondary)] text-sm">
-                  محمد حسین حسینی
+                <span className="hidden sm:block text-[var(--text-secondary)] text-sm">
+                  {user.fullName}
                 </span>
               </div>
-            </Link>
+            ) : (
+              <Link href="/register">
+                <LogIn className="w-6 h-6 text-[var(--text-secondary)] cursor-pointer hover:text-[var(--foreground)]" />
+              </Link>
+            )}
           </div>
-        </div>
+          </div>
       </header>
     </>
   );
