@@ -6,6 +6,7 @@ import Sidebar from "@/components/Sidebar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SidebarProvider } from "@/components/SidebarContext";
 import { UserProvider } from "@/components/UserContext";
+import ClientLayout from "@/components/ClientLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,16 +37,8 @@ export default function RootLayout({
         <ThemeProvider>
           <UserProvider>
             <SidebarProvider>
-            <div className="relative flex h-screen overflow-hidden">
-              <Sidebar />
-              <div className="flex flex-col flex-1 overflow-auto md:ml-0">
-                <div className="max-w-7xl mx-auto w-full">
-                  <Header />
-                  <main>{children}</main>
-                </div>
-              </div>
-            </div>
-          </SidebarProvider>
+              <ClientLayout>{children}</ClientLayout>
+            </SidebarProvider>
           </UserProvider>
         </ThemeProvider>
       </body>

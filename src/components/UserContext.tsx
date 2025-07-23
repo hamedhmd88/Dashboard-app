@@ -3,7 +3,7 @@
 
 // -----------------------------
 // ابزارهای مورد نیاز را از React ایمپورت می‌کنیم:
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
 // تعریف نوع (Type) کاربر:
 // نوع "User" می‌تونه یک شیء شامل fullName باشه، یا null باشه (برای وقتی کاربری لاگین نکرده)
@@ -31,9 +31,20 @@ const UserContext = createContext<{
 
 // 🔹 حالا یک Provider تعریف می‌کنیم که context را برای اجزای داخلی‌اش فراهم می‌کند
 export function UserProvider({ children }: { children: ReactNode }) {
-  // state مربوط به کاربر را با useState نگه می‌داریم
-  const [user, setUser] = useState<User>(null); // حالت اولیه: null (یعنی هنوز کاربری لاگین نیست)
-
+  const [user, setUser] = useState<User>(null);
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('user');
+    }
+  }, [user]);
   return (
     // اینجا مقدار context را به Provider می‌دهیم تا بقیه اجزا بتوانند به آن دسترسی داشته باشند
     <UserContext.Provider value={{ user, setUser }}>
