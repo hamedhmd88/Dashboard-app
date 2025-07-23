@@ -113,6 +113,7 @@ function Sidebar() {
               <Link
                 key={name}
                 href={href}
+                scroll={true}
                 onClick={() => isMobileOpen && toggleMobile()}
               >
                 <div

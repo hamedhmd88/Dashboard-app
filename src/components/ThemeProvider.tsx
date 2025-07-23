@@ -13,7 +13,7 @@ const ThemeContext = createContext<
 // کامپوننت ThemeProvider که تم را مدیریت می‌کند و به فرزندان ارائه می‌دهد.
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   // حالت تم با مقدار اولیه "light".
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>("dark");
 
   // افکت برای اعمال کلاس "dark" به المنت ریشه بر اساس تم.
   useEffect(() => {
