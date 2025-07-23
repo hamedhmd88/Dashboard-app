@@ -1,34 +1,29 @@
 "use client";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTheme } from "@/components/ThemeProvider";
 import { Eye, EyeOff } from "lucide-react";
 import { useUser } from "@/components/UserContext";
+import { useForm } from "react-hook-form";
 
 function Register() {
   const { setUser } = useUser();
-  const [name, setName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors }
+  } = useForm({ mode: "onTouched" });
+  const router = useRouter();
+  const { theme } = useTheme();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
-  const { theme } = useTheme();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      alert("پسوردها مطابقت ندارند");
-      return;
-    }
+  const onSubmit = (data: { name: string; lastName: string }) => {
     setLoading(true);
-    // Simulate API call
     setTimeout(() => {
-      setUser({ fullName: `${name} ${lastName}` });
+      setUser({ fullName: `${data.name} ${data.lastName}` });
       setLoading(false);
       router.push("/");
     }, 2000);
@@ -38,39 +33,49 @@ function Register() {
     <div className="min-h-screen flex items-center justify-center bg-[var(--background)] text-[var(--foreground)]">
       <div className="p-8 rounded-lg shadow-lg w-full max-w-md bg-[var(--component-bg)] border border-[var(--border)]">
         <h2 className="text-2xl font-bold mb-6 text-center">ثبت نام</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit((data: any) => onSubmit(data as { name: string; lastName: string }))} className="space-y-4">
           <input
             type="text"
             placeholder="نام"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full p-3 rounded border bg-[var(--component-bg)] border-[var(--border)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
+            {...register("name", { required: "پر کردن این فیلد اجباری است" })}
+            className={`w-full p-3 rounded border bg-[var(--component-bg)] border-[var(--border)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.name ? 'border-red-500' : ''}`}
           />
+          {errors.name && <div className="text-red-500 text-sm ">{errors.name.message?.toString()}</div>}
+
           <input
             type="text"
             placeholder="نام خانوادگی"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            className="w-full p-3 rounded border bg-[var(--component-bg)] border-[var(--border)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
+            {...register("lastName", { required: "پر کردن این فیلد اجباری است" })}
+            className={`w-full p-3 rounded border bg-[var(--component-bg)] border-[var(--border)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.lastName ? 'border-red-500' : ''}`}
           />
+          {errors.lastName && <div className="text-red-500 text-sm ">{errors.lastName.message?.toString()}</div>}
+
           <input
             type="email"
             placeholder="ایمیل"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-3 rounded border bg-[var(--component-bg)] border-[var(--border)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
+            {...register("email", {
+              required: "پر کردن این فیلد اجباری است",
+              pattern: {
+                value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                message: "ایمیل معتبر نیست"
+              }
+            })}
+            className={`w-full p-3 rounded border bg-[var(--component-bg)] border-[var(--border)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.email ? 'border-red-500' : ''}`}
           />
+          {errors.email && <div className="text-red-500 text-sm ">{errors.email.message?.toString()}</div>}
+
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
               placeholder="پسورد"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 rounded border bg-[var(--component-bg)] border-[var(--border)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
+              {...register("password", {
+                required: "پر کردن این فیلد اجباری است",
+                minLength: {
+                  value: 4,
+                  message: "پسورد باید حداقل ۴ کاراکتر باشد"
+                }
+              })}
+              className={`w-full p-3 rounded border bg-[var(--component-bg)] border-[var(--border)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.password ? 'border-red-500' : ''}`}
             />
             <button
               type="button"
@@ -80,14 +85,17 @@ function Register() {
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
+          {errors.password && <div className="text-red-500 text-sm ">{errors.password.message?.toString()}</div>}
+
           <div className="relative">
             <input
               type={showConfirmPassword ? "text" : "password"}
               placeholder="تایید پسورد"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full p-3 rounded border bg-[var(--component-bg)] border-[var(--border)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
+              {...register("confirmPassword", {
+                required: "پر کردن این فیلد اجباری است",
+                validate: (value) => value === watch("password") || "پسوردها یکی نیستند"
+              })}
+              className={`w-full p-3 rounded border bg-[var(--component-bg)] border-[var(--border)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.confirmPassword ? 'border-red-500' : ''}`}
             />
             <button
               type="button"
@@ -97,10 +105,12 @@ function Register() {
               {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
+          {errors.confirmPassword && <div className="text-red-500 text-sm ">{errors.confirmPassword.message?.toString()}</div>}
+
           <button
             type="submit"
             disabled={loading}
-            className={`w-full p-3 rounded bg-blue-500 text-white font-semibold hover:bg-blue-600 transition disabled:opacity-50 flex items-center justify-center`}
+            className={`w-full p-3 rounded bg-blue-500 text-white font-semibold hover:bg-blue-600 transition disabled:opacity-50 flex items-center justify-center cursor-pointer`}
           >
             {loading ? (
               <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">

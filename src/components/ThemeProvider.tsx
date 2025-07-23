@@ -12,10 +12,18 @@ const ThemeContext = createContext<
 
 // کامپوننت ThemeProvider که تم را مدیریت می‌کند و به فرزندان ارائه می‌دهد.
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // حالت تم با مقدار اولیه "light".
-  const [theme, setTheme] = useState<Theme>("dark");
+  // حالت تم با مقدار اولیه "dark".
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "light" || savedTheme === "dark") {
+        return savedTheme as Theme;
+      }
+    }
+    return "dark";
+  });
 
-  // افکت برای اعمال کلاس "dark" به المنت ریشه بر اساس تم.
+  // اعمال کلاس "dark" به المنت ریشه بلافاصله در بارگذاری اولیه.
   useEffect(() => {
     if (theme === "dark") {
       // اضافه کردن کلاس dark برای تم تاریک.
@@ -24,7 +32,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       // حذف کلاس dark برای تم روشن.
       document.documentElement.classList.remove("dark");
     }
-  }, [theme]); // وابستگی به تم برای اجرای مجدد.
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   // تابعی برای تغییر تم بین light و dark.
   const toggleTheme = () => {
@@ -38,6 +47,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     </ThemeContext.Provider>
   );
 }
+
 
 // هوک سفارشی برای استفاده از کانتکست تم در کامپوننت‌های دیگر.
 export function useTheme() {
