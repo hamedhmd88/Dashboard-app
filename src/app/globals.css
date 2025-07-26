@@ -1,67 +1,67 @@
 @import "tailwindcss";
 @font-face {
-  font-family: 'IRANYekanX';
-  src: url('/fonts/IranYekan/IRANYekanX-UltraLight.woff2') format('woff2');
+  font-family: "IRANYekanX";
+  src: url("/fonts/IranYekan/IRANYekanX-UltraLight.woff2") format("woff2");
   font-weight: 100;
   font-style: normal;
 }
 @font-face {
-  font-family: 'IRANYekanX';
-  src: url('/fonts/IranYekan/IRANYekanX-Thin.woff2') format('woff2');
+  font-family: "IRANYekanX";
+  src: url("/fonts/IranYekan/IRANYekanX-Thin.woff2") format("woff2");
   font-weight: 200;
   font-style: normal;
 }
 @font-face {
-  font-family: 'IRANYekanX';
-  src: url('/fonts/IranYekan/IRANYekanX-Light.woff2') format('woff2');
+  font-family: "IRANYekanX";
+  src: url("/fonts/IranYekan/IRANYekanX-Light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
 }
 @font-face {
-  font-family: 'IRANYekanX';
-  src: url('/fonts/IranYekan/IRANYekanX-Regular.woff2') format('woff2');
+  font-family: "IRANYekanX";
+  src: url("/fonts/IranYekan/IRANYekanX-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: 'IRANYekanX';
-  src: url('/fonts/IranYekan/IRANYekanX-Medium.woff2') format('woff2');
+  font-family: "IRANYekanX";
+  src: url("/fonts/IranYekan/IRANYekanX-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
-  font-family: 'IRANYekanX';
-  src: url('/fonts/IranYekan/IRANYekanX-DemiBold.woff2') format('woff2');
+  font-family: "IRANYekanX";
+  src: url("/fonts/IranYekan/IRANYekanX-DemiBold.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
 }
 @font-face {
-  font-family: 'IRANYekanX';
-  src: url('/fonts/IranYekan/IRANYekanX-Bold.woff2') format('woff2');
+  font-family: "IRANYekanX";
+  src: url("/fonts/IranYekan/IRANYekanX-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
-  font-family: 'IRANYekanX';
-  src: url('/fonts/IranYekan/IRANYekanX-ExtraBold.woff2') format('woff2');
+  font-family: "IRANYekanX";
+  src: url("/fonts/IranYekan/IRANYekanX-ExtraBold.woff2") format("woff2");
   font-weight: 800;
   font-style: normal;
 }
 @font-face {
-  font-family: 'IRANYekanX';
-  src: url('/fonts/IranYekan/IRANYekanX-Black.woff2') format('woff2');
+  font-family: "IRANYekanX";
+  src: url("/fonts/IranYekan/IRANYekanX-Black.woff2") format("woff2");
   font-weight: 900;
   font-style: normal;
 }
 @font-face {
-  font-family: 'IRANYekanX';
-  src: url('/fonts/IranYekan/IRANYekanX-ExtraBlack.woff2') format('woff2');
+  font-family: "IRANYekanX";
+  src: url("/fonts/IranYekan/IRANYekanX-ExtraBlack.woff2") format("woff2");
   font-weight: 950;
   font-style: normal;
 }
 @font-face {
-  font-family: 'IRANYekanX';
-  src: url('/fonts/IranYekan/IRANYekanX-Heavy.woff2') format('woff2');
+  font-family: "IRANYekanX";
+  src: url("/fonts/IranYekan/IRANYekanX-Heavy.woff2") format("woff2");
   font-weight: 960;
   font-style: normal;
 }
@@ -69,6 +69,7 @@
   --background: #ffffff;
   --foreground: #171717;
   --component-bg: #f0f0f0;
+  --component-bg-state: linear-gradient(to top, #ffffff, #f1f5f9);
   --component-hover: #e0e0e0;
   --border: #d1d1d1;
   --text-secondary: #171717;
@@ -77,10 +78,11 @@
 }
 
 .dark {
-  --background: #000000;
+  --background: #060505;
   --foreground: #ededed;
-  --component-bg: #0A0A0A;
-  --component-hover: #1F1F1F;
+  --component-bg: #0a0a0a;
+  --component-bg-state: linear-gradient(to top, #121212, #020202);
+  --component-hover: #1f1f1f;
   --border: #2f2f2f;
   --text-secondary: #d1d5db;
   --editing-bg: #2f2f2f;
@@ -93,12 +95,14 @@ body {
   direction: rtl;
 }
 
-body, * {
-  font-family: 'IRANYekanX', sans-serif;
+body,
+* {
+  font-family: "IRANYekanX", sans-serif;
   font-feature-settings: "ss01";
 }
 
-.persian-digits, .persian-digits * {
+.persian-digits,
+.persian-digits * {
   font-family: inherit;
   font-feature-settings: "ss01";
   direction: rtl;

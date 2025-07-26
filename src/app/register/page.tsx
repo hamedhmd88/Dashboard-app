@@ -34,14 +34,14 @@ function Register() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black relative overflow-hidden text-gray-100">
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-600 rounded-full filter blur-3xl opacity-20 transform translate-x-1/3 -translate-y-1/3"></div>
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600 rounded-full filter blur-3xl opacity-20 transform -translate-x-1/3 translate-y-1/3"></div>
-      <div className="p-8 rounded-xl shadow-2xl w-full max-w-md bg-gray-800/40 backdrop-blur-xl border border-gray-600/30 relative z-10">
+      <div className="p-8 rounded-xl shadow-2xl w-full max-w-md bg-[rgb(17,25,40,0.5)] backdrop-blur-xl border border-gray-600/30 relative z-10">
         <h2 className="text-2xl font-bold mb-6 text-center">ثبت نام</h2>
         <form onSubmit={handleSubmit((data: any) => onSubmit(data as { name: string; lastName: string }))} className="space-y-4">
           <input
             type="text"
             placeholder="نام"
             {...register("name", { required: "پر کردن این فیلد اجباری است" })}
-            className={`w-full p-3 rounded-lg bg-white/5 backdrop-blur-sm border ${errors.name ? 'border-red-500/50' : watch('name') ? 'border-green-500/50' : 'border-gray-500/30'} text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all`}
+            className={`w-full p-3 rounded-lg bg-white/5 backdrop-blur-md border ${errors.name ? 'border-red-500/50' : watch('name') ? 'border-green-500/50' : 'border-gray-500/30'} text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all`}
           />
           {errors.name ? (
             <div className="text-red-500 text-sm">{errors.name.message?.toString()}</div>
