@@ -32,8 +32,8 @@ function Register() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black relative overflow-hidden text-gray-100">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-purple-600 rounded-full filter blur-3xl opacity-20 transform translate-x-1/3 -translate-y-1/3"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-600 rounded-full filter blur-3xl opacity-20 transform -translate-x-1/3 translate-y-1/3"></div>
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-600 rounded-full filter blur-3xl opacity-20 transform translate-x-1/3 -translate-y-1/3"></div>
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600 rounded-full filter blur-3xl opacity-20 transform -translate-x-1/3 translate-y-1/3"></div>
       <div className="p-8 rounded-xl shadow-2xl w-full max-w-md bg-gray-800/40 backdrop-blur-xl border border-gray-600/30 relative z-10">
         <h2 className="text-2xl font-bold mb-6 text-center">ثبت نام</h2>
         <form onSubmit={handleSubmit((data: any) => onSubmit(data as { name: string; lastName: string }))} className="space-y-4">
