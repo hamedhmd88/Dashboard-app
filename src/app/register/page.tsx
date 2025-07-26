@@ -41,17 +41,25 @@ function Register() {
             type="text"
             placeholder="نام"
             {...register("name", { required: "پر کردن این فیلد اجباری است" })}
-            className={`w-full p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-gray-500/30 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all ${errors.name ? 'border-red-500/50' : ''}`}
+            className={`w-full p-3 rounded-lg bg-white/5 backdrop-blur-sm border ${errors.name ? 'border-red-500/50' : watch('name') ? 'border-green-500/50' : 'border-gray-500/30'} text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all`}
           />
-          {errors.name && <div className="text-red-500 text-sm ">{errors.name.message?.toString()}</div>}
+          {errors.name ? (
+            <div className="text-red-500 text-sm">{errors.name.message?.toString()}</div>
+          ) : watch('name') ? (
+            <div className="text-green-500 text-sm">درست پر شده</div>
+          ) : null}
 
           <input
             type="text"
             placeholder="نام خانوادگی"
             {...register("lastName", { required: "پر کردن این فیلد اجباری است" })}
-            className={`w-full p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-gray-500/30 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all ${errors.lastName ? 'border-red-500/50' : ''}`}
+            className={`w-full p-3 rounded-lg bg-white/5 backdrop-blur-sm border ${errors.lastName ? 'border-red-500/50' : watch('lastName') ? 'border-green-500/50' : 'border-gray-500/30'} text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all`}
           />
-          {errors.lastName && <div className="text-red-500 text-sm ">{errors.lastName.message?.toString()}</div>}
+          {errors.lastName ? (
+            <div className="text-red-500 text-sm">{errors.lastName.message?.toString()}</div>
+          ) : watch('lastName') ? (
+            <div className="text-green-500 text-sm">درست پر شده</div>
+          ) : null}
 
           <input
             type="email"
@@ -63,9 +71,13 @@ function Register() {
                 message: "ایمیل معتبر نیست"
               }
             })}
-            className={`w-full p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-gray-500/30 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all ${errors.email ? 'border-red-500/50' : ''}`}
+            className={`w-full p-3 rounded-lg bg-white/5 backdrop-blur-sm border ${errors.email ? 'border-red-500/50' : watch('email') ? 'border-green-500/50' : 'border-gray-500/30'} text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all`}
           />
-          {errors.email && <div className="text-red-500 text-sm ">{errors.email.message?.toString()}</div>}
+          {errors.email ? (
+            <div className="text-red-500 text-sm">{errors.email.message?.toString()}</div>
+          ) : watch('email') ? (
+            <div className="text-green-500 text-sm">درست پر شده</div>
+          ) : null}
 
           <div className="relative">
             <input
@@ -78,7 +90,7 @@ function Register() {
                   message: "پسورد باید حداقل ۴ کاراکتر باشد"
                 }
               })}
-              className={`w-full p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-gray-500/30 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all ${errors.password ? 'border-red-500/50' : ''}`}
+              className={`w-full p-3 rounded-lg bg-white/5 backdrop-blur-sm border ${errors.password ? 'border-red-500/50' : watch('password') ? 'border-green-500/50' : 'border-gray-500/30'} text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all`}
             />
             <button
               type="button"
@@ -88,7 +100,11 @@ function Register() {
               {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
             </button>
           </div>
-          {errors.password && <div className="text-red-500 text-sm ">{errors.password.message?.toString()}</div>}
+          {errors.password ? (
+            <div className="text-red-500 text-sm">{errors.password.message?.toString()}</div>
+          ) : watch('password') ? (
+            <div className="text-green-500 text-sm">درست پر شده</div>
+          ) : null}
 
           <div className="relative">
             <input
@@ -98,7 +114,7 @@ function Register() {
                 required: "پر کردن این فیلد اجباری است",
                 validate: (value) => value === watch("password") || "پسوردها یکی نیستند"
               })}
-              className={`w-full p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-gray-500/30 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all ${errors.confirmPassword ? 'border-red-500/50' : ''}`}
+              className={`w-full p-3 rounded-lg bg-white/5 backdrop-blur-sm border ${errors.confirmPassword ? 'border-red-500/50' : watch('confirmPassword') ? 'border-green-500/50' : 'border-gray-500/30'} text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all`}
             />
             <button
               type="button"
@@ -108,7 +124,11 @@ function Register() {
               {showConfirmPassword ? <Eye size={20} /> : <EyeOff size={20} />}
             </button>
           </div>
-          {errors.confirmPassword && <div className="text-red-500 text-sm ">{errors.confirmPassword.message?.toString()}</div>}
+          {errors.confirmPassword ? (
+            <div className="text-red-500 text-sm">{errors.confirmPassword.message?.toString()}</div>
+          ) : watch('confirmPassword') && watch('confirmPassword') === watch('password') ? (
+            <div className="text-green-500 text-sm">درست پر شده</div>
+          ) : null}
 
           <button
             type="submit"
