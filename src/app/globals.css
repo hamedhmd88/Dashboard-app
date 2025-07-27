@@ -66,23 +66,23 @@
   font-style: normal;
 }
 :root {
-  --background: #ffffff;
+  --background: #f6f6f6;
   --foreground: #171717;
-  --component-bg: #f0f0f0;
+  --component-bg: #dbdada;
   --component-bg-state: linear-gradient(to top, #ffffff, #f1f5f9);
-  --component-hover: #e0e0e0;
-  --border: #d1d1d1;
+  --component-hover: #cfcbcb;
+  --border: #b6b6b6;
   --text-secondary: #171717;
   --editing-bg: #d4d4d4;
   --text-disabled: #a0a0a0;
 }
 
 .dark {
-  --background: #060505;
+  --background: #121212;
   --foreground: #ededed;
-  --component-bg: #0a0a0a;
+  --component-bg: #1F1F1F;
   --component-bg-state: linear-gradient(to top, #121212, #020202);
-  --component-hover: #1f1f1f;
+  --component-hover: #2e2c2c;
   --border: #2f2f2f;
   --text-secondary: #d1d5db;
   --editing-bg: #2f2f2f;
