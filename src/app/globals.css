@@ -110,3 +110,17 @@ body,
   font-variant-numeric: ordinal;
   /* اعداد فارسی در اکثر فونت‌های فارسی با این تنظیمات نمایش داده می‌شوند */
 }
+
+@layer components {
+  @keyframes loading {
+    0% {
+      transform: translateX(100%);
+    }
+    50% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+}

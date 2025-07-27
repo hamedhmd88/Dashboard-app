@@ -32,7 +32,9 @@ const CategoryChart = () => {
     // درخواست fetch برای دریافت داده‌ها.
     fetch("/data/data.json")
       .then((res) => res.json()) // تبدیل پاسخ به JSON.
-      .then((data) => setCategoryData(data.categories)); // تنظیم داده‌ها در حالت.
+      .then((data) => {
+        setTimeout(() => setCategoryData(data.categories), 2000);
+      });
   }, []); // وابستگی خالی برای اجرای تنها یک بار.
 
   // افکت برای بررسی و به‌روزرسانی اندازه صفحه نمایش.
