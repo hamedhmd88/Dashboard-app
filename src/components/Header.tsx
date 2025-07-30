@@ -8,9 +8,11 @@ import admin from "../../public/images/admin.jpg";
 import Link from "next/link";
 import { LogIn } from "lucide-react";
 import { useUser } from "./UserContext";
+import { LogOut } from "lucide-react";
 function Header() {
   const { user } = useUser();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const [messages, setMessages] = useState([
     { sender: "علی احمدی", preview: "سلام، سفارش جدید...", date: "۱۴۰۲/۰۸/۱۰" },
     { sender: "مریم رضایی", preview: "پرداخت انجام شد...", date: "۱۴۰۲/۰۸/۰۹" },
@@ -141,17 +143,34 @@ function Header() {
                 ))}
             </div>
             {user ? (
-              <div className="flex items-center space-x-2 sm:space-x-3">
-                <Image
-                  src={admin}
-                  alt="admin"
-                  width={35}
-                  height={35}
-                  className="rounded-full shadow-md"
-                />
-                <span className="hidden sm:block text-[var(--text-secondary)] text-sm">
-                  {user.fullName}
-                </span>
+              <div className="relative">
+                <div
+                  className="flex items-center space-x-2 sm:space-x-3 cursor-pointer"
+                  onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
+                >
+                  <Image
+                    src={admin}
+                    alt="admin"
+                    width={35}
+                    height={35}
+                    className="rounded-full shadow-md"
+                  />
+                  <span className="hidden sm:block text-[var(--text-secondary)] text-sm">
+                    {user.fullName}
+                  </span>
+                </div>
+                {isUserDropdownOpen && (
+                  <div className="absolute -left-5 mt-2 w-48 flex items-center justify-center bg-[var(--background)] border border-[var(--border)] rounded-lg shadow-lg z-50">
+                    <Link
+                      href="/register"
+                      className="w-full flex items-center justify-center px-4 py-2 text-sm text-[var(--text-secondary)] hover:bg-[var(--component-hover)]"
+                      onClick={() => setIsUserDropdownOpen(false)}
+                    >
+                      خروج از حساب
+                      <LogOut className="w-4 h-4 mr-2" />
+                    </Link>
+                  </div>
+                )}
               </div>
             ) : (
               <Link href="/register">
@@ -159,7 +178,7 @@ function Header() {
               </Link>
             )}
           </div>
-          </div>
+        </div>
       </header>
     </>
   );
