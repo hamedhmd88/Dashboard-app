@@ -32,12 +32,18 @@ const UserContext = createContext<{
 // 🔹 حالا یک Provider تعریف می‌کنیم که context را برای اجزای داخلی‌اش فراهم می‌کند
 export function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User>(null);
+
+  // این useEffect فقط یک بار در زمان mount کامپوننت اجرا می‌شود
+  // و اطلاعات کاربر را از localStorage بارگذاری می‌کند
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
   }, []);
+
+  // این useEffect هر وقت مقدار user تغییر کند اجرا می‌شود
+  // و اطلاعات کاربر را در localStorage ذخیره می‌کند یا حذف می‌کند
   useEffect(() => {
     if (user) {
       localStorage.setItem('user', JSON.stringify(user));
