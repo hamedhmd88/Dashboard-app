@@ -20,12 +20,14 @@ type User = {
 const UserContext = createContext<{
   user: User;
   setUser: (user: User) => void;
+  logout: () => void;
 }>(
 
   // ⬇ این قسمت مقدار اولیه (🟡 Default Value) هست که به createContext داده شده
   {
     user: null,              // در حالت اولیه، هیچ کاربری لاگین نیست
     setUser: () => {},       // تابع خالی؛ برای جلوگیری از خطا در زمان استفاده خارج از Provider
+    logout: () => {},        // تابع خالی؛ برای جلوگیری از خطا در زمان استفاده خارج از Provider
   }
 );
 
@@ -51,9 +53,13 @@ export function UserProvider({ children }: { children: ReactNode }) {
       localStorage.removeItem('user');
     }
   }, [user]);
+   const logout = () => {
+    localStorage.removeItem('user');
+    setUser(null);
+  };
   return (
     // اینجا مقدار context را به Provider می‌دهیم تا بقیه اجزا بتوانند به آن دسترسی داشته باشند
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser,  logout }}>
       {children}
     </UserContext.Provider>
   );
