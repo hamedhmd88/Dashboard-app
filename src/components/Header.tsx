@@ -10,7 +10,7 @@ import { LogIn } from "lucide-react";
 import { useUser } from "./UserContext";
 import { LogOut } from "lucide-react";
 function Header() {
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const [messages, setMessages] = useState([
@@ -164,7 +164,10 @@ function Header() {
                     <Link
                       href="/register"
                       className="w-full flex items-center justify-center px-4 py-2 text-sm text-[var(--text-secondary)] hover:bg-[var(--component-hover)]"
-                      onClick={() => setIsUserDropdownOpen(false)}
+                      onClick={() => {
+                        setUser(null);
+                        setIsUserDropdownOpen(false);
+                      }}
                     >
                       خروج از حساب
                       <LogOut className="w-4 h-4 mr-2" />
