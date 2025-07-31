@@ -12,17 +12,19 @@ import {
   Bar,
   Legend,
 } from "recharts";
+import { useProductPerformanceData } from "@/hooks/useDashboardData";
 
 const ProductPerformanceChart = () => {
-  const [productPerformanceData, setProductPerformanceData] = useState<
-    ProductPerformance[]
-  >([]);
+  // const [productPerformanceData, setProductPerformanceData] = useState<
+  //   ProductPerformance[]
+  // >([]);
+  const { productPerformance, isLoading, error } = useProductPerformanceData();
 
-  useEffect(() => {
-    fetch("/data/data.json")
-      .then((res) => res.json())
-      .then((data) => setProductPerformanceData(data.productPerformance));
-  }, []);
+  // useEffect(() => {
+  //   fetch("/data/data.json")
+  //     .then((res) => res.json())
+  //     .then((data) => setProductPerformanceData(data.productPerformance));
+  // }, []);
 
   // --- تغییرات اینجا ---
 
@@ -40,6 +42,44 @@ const ProductPerformanceChart = () => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+        className="dashboard-card p-4 md:p-6 mx-2 md:mx-0"
+      >
+        <h2 className="text-base md:text-2xl font-medium mb-4 text-[var(--text-secondary)] text-center md:text-right">
+        وضعیت محصولات
+        </h2>
+        <div className="h-64 md:h-80 flex items-center justify-center">
+          <div className="animate-pulse text-[var(--text-secondary)]">
+            در حال بارگذاری...
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
+
+  if (error) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+        className="dashboard-card p-4 md:p-6 mx-2 md:mx-0"
+      >
+        <h2 className="text-base md:text-2xl font-medium mb-4 text-[var(--text-secondary)] text-center md:text-right">
+        وضعیت محصولات
+        </h2>
+        <div className="h-64 md:h-80 flex items-center justify-center text-red-500">
+          خطا در بارگذاری داده‌ها
+        </div>
+      </motion.div>
+    );
+  }
+
   return (
     <motion.div
       className="bg-[var(--component-bg)] backdrop-blur-lg shadow-lg rounded-xl p-4 md:p-6 border border-[var(--border)] mx-2 md:mx-0 text-right" // اضافه کردن text-right برای RTL
@@ -53,7 +93,7 @@ const ProductPerformanceChart = () => {
       <div className="w-full h-64 md:h-72">
         <ResponsiveContainer>
           <BarChart
-            data={productPerformanceData}
+            data={productPerformance}
             margin={{ top: 20, right: 30, left: 20, bottom: 5 }} // افزایش margin-left برای فضای YAxis
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
@@ -143,5 +183,3 @@ const ProductPerformanceChart = () => {
 };
 
 export default ProductPerformanceChart;
-
-
