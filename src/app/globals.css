@@ -66,24 +66,24 @@
   font-style: normal;
 }
 :root {
-  --background: #f6f6f6;
+  --background: #9ea8ae;
   --foreground: #171717;
-  --component-bg: #dbdada;
+  --component-bg: #d3d9dc;
   --component-bg-state: linear-gradient(to top, #ffffff, #f1f5f9);
-  --component-hover: #cfcbcb;
-  --border: #b6b6b6;
+  --component-hover: #9ea8ae;
+  --border: #69808c;
   --text-secondary: #171717;
   --editing-bg: #d4d4d4;
   --text-disabled: #a0a0a0;
 }
 
 .dark {
-  --background: #121212;
+  --background: #001c29;
   --foreground: #ededed;
-  --component-bg: #1F1F1F;
+  --component-bg: #0e2f3f;
   --component-bg-state: linear-gradient(to top, #121212, #020202);
-  --component-hover: #2e2c2c;
-  --border: #2f2f2f;
+  --component-hover: #194054;
+  --border: #194054;
   --text-secondary: #d1d5db;
   --editing-bg: #2f2f2f;
   --text-disabled: #6b7280;
