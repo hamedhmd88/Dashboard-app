@@ -10,18 +10,35 @@ import {
   Legend,
 } from "recharts";
 import { motion } from "framer-motion";
+import { useOrderStatusData } from "@/hooks/useDashboardData";
 
 
 const COLORS = ["#F8C02D", "#03A9F4", "#EF4444", "#8BC34A"]; // Pending, Processing, Canceled, Delivered
 
 const OrderChart = () => {
-  const [orderStatusData, setOrderStatusData] = useState<OrderStatus[]>([]);
+  // const [orderStatusData, setOrderStatusData] = useState<OrderStatus[]>([]);
+    const { orderStatus, isLoading, error } = useOrderStatusData();
 
+      const [isSmallMediaScreen, setIsSmallMediaScreen] = useState<boolean>(false);
+
+     // افکت برای بررسی و به‌روزرسانی اندازه صفحه نمایش.
   useEffect(() => {
-    fetch("/data/data.json")
-      .then((res) => res.json())
-      .then((data) => setOrderStatusData(data.orderStatus));
-  }, []);
+    // تابع برای چک کردن عرض صفحه.
+    const updateScreenSize = () => {
+      setIsSmallMediaScreen(window.innerWidth <= 768); // اگر عرض کمتر از 768 باشد، موبایل در نظر گرفته می‌شود.
+    };
+    updateScreenSize(); // اجرای اولیه.
+    window.addEventListener("resize", updateScreenSize); // اضافه کردن listener برای تغییرات اندازه.
+    return () => {
+      window.removeEventListener("resize", updateScreenSize); // پاکسازی listener هنگام unmount.
+    };
+  }, []); // وابستگی خالی برای اجرای تنها یک بار.
+  // useEffect(() => {
+  //   fetch("/data/data.json")
+  //     .then((res) => res.json())
+  //     .then((data) => setOrderStatusData(data.orderStatus));
+  // }, []);
+  const outerRadius = isSmallMediaScreen ? 60 : 90;
 
   // تابع سفارشی برای رندر کردن لیبل‌ها
   const renderCustomizedLabel = ({
@@ -84,7 +101,41 @@ const OrderChart = () => {
       </g>
     );
   };
+  if (isLoading) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+        className="dashboard-card p-4 md:p-6 mx-2 md:mx-0"
+      >
+        <h2 className="text-base md:text-2xl font-medium mb-4 text-[var(--text-secondary)] text-center md:text-right">
+          وضعیت سفارشات
+        </h2>
+        <div className="h-64 md:h-80 flex items-center justify-center">
+          <div className="animate-pulse text-[var(--text-secondary)]">در حال بارگذاری...</div>
+        </div>
+      </motion.div>
+    );
+  }
 
+  if (error) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+        className="dashboard-card p-4 md:p-6 mx-2 md:mx-0"
+      >
+        <h2 className="text-base md:text-2xl font-medium mb-4 text-[var(--text-secondary)] text-center md:text-right">
+          وضعیت سفارشات
+        </h2>
+        <div className="h-64 md:h-80 flex items-center justify-center text-red-500">
+          خطا در بارگذاری داده‌ها
+        </div>
+      </motion.div>
+    );
+  }
   return (
     <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -99,14 +150,14 @@ const OrderChart = () => {
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
-              data={orderStatusData}
+              data={orderStatus}
               cx="50%"
               cy="50%"
-              outerRadius={90} // شعاع بیرونی نمودار
+              outerRadius={outerRadius}
               dataKey="value"
               label={renderCustomizedLabel} // استفاده از تابع سفارشی لیبل
             >
-              {orderStatusData.map((entry, index) => (
+              {orderStatus.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
