@@ -124,3 +124,13 @@ body,
     }
   }
 }
+
+@layer components {
+  .dashboard-card {
+    @apply bg-[var(--component-bg)] backdrop-blur-md shadow-lg rounded-xl border border-[var(--border)];
+  }
+  
+  .dashboard-container {
+    @apply max-w-7xl mx-auto py-4 px-4 lg:px-8;
+  }
+}
