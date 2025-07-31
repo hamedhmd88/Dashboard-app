@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { SidebarProvider } from "@/components/SidebarContext";
 import { UserProvider } from "@/components/UserContext";
 import ClientLayout from "@/components/ClientLayout";
+import { DataProvider } from "@/components/DataContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased persian-digits`}
         suppressHydrationWarning={true}
       >
+        <DataProvider>
         <ThemeProvider>
           <UserProvider>
             <SidebarProvider>
@@ -41,6 +43,7 @@ export default function RootLayout({
             </SidebarProvider>
           </UserProvider>
         </ThemeProvider>
+        </DataProvider>
       </body>
     </html>
   );
