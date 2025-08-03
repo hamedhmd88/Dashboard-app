@@ -66,24 +66,24 @@
   font-style: normal;
 }
 :root {
-  --background: #9ea8ae;
+  --background: #ffffff;
   --foreground: #171717;
-  --component-bg: #d3d9dc;
+  --component-bg: #f0f2f5;
   --component-bg-state: linear-gradient(to top, #ffffff, #f1f5f9);
-  --component-hover: #9ea8ae;
-  --border: #69808c;
+  --component-hover: #e1e4e8;
+  --border: #d0d7de;
   --text-secondary: #171717;
   --editing-bg: #d4d4d4;
   --text-disabled: #a0a0a0;
 }
 
 .dark {
-  --background: #001c29;
+  --background: #010409;
   --foreground: #ededed;
-  --component-bg: #0e2f3f;
+  --component-bg: #0d1117;
   --component-bg-state: linear-gradient(to top, #121212, #020202);
-  --component-hover: #194054;
-  --border: #194054;
+  --component-hover: #262c36;
+  --border: #262c36;
   --text-secondary: #d1d5db;
   --editing-bg: #2f2f2f;
   --text-disabled: #6b7280;
@@ -129,7 +129,7 @@ body,
   .dashboard-card {
     @apply bg-[var(--component-bg)] backdrop-blur-md shadow-lg rounded-xl border border-[var(--border)];
   }
-  
+
   .dashboard-container {
     @apply max-w-7xl mx-auto py-4 px-4 lg:px-8;
   }
