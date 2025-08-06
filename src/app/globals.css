@@ -135,4 +135,22 @@ body,
   }
 }
 
-
+.error-text {
+  color: #ef4444;
+  font-size: 14px;
+  margin-top: 4px;
+  animation: shake 0.3s ease-in-out;
+  text-align: right;
+}
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}

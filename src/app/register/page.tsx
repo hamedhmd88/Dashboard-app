@@ -44,7 +44,7 @@ function Register() {
             className={`w-full p-3 rounded-lg bg-white/5 backdrop-blur-md border ${errors.name ? 'border-red-500/50' : watch('name') ? 'border-green-500/50' : 'border-gray-500/30'} text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all`}
           />
           {errors.name ? (
-            <div className="text-red-500 text-sm">{errors.name.message?.toString()}</div>
+            <div className="error-text">{errors.name.message?.toString()}</div>
           ) : watch('name') ? (
             <div className="text-green-500 text-sm">درست پر شده</div>
           ) : null}
@@ -56,7 +56,7 @@ function Register() {
             className={`w-full p-3 rounded-lg bg-white/5 backdrop-blur-sm border ${errors.lastName ? 'border-red-500/50' : watch('lastName') ? 'border-green-500/50' : 'border-gray-500/30'} text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all`}
           />
           {errors.lastName ? (
-            <div className="text-red-500 text-sm">{errors.lastName.message?.toString()}</div>
+            <div className="error-text">{errors.lastName.message?.toString()}</div>
           ) : watch('lastName') ? (
             <div className="text-green-500 text-sm">درست پر شده</div>
           ) : null}
@@ -74,7 +74,7 @@ function Register() {
             className={`w-full p-3 rounded-lg bg-white/5 backdrop-blur-sm border ${errors.email ? 'border-red-500/50' : watch('email') ? 'border-green-500/50' : 'border-gray-500/30'} text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all`}
           />
           {errors.email ? (
-            <div className="text-red-500 text-sm">{errors.email.message?.toString()}</div>
+            <div className="error-text">{errors.email.message?.toString()}</div>
           ) : watch('email') ? (
             <div className="text-green-500 text-sm">درست پر شده</div>
           ) : null}
@@ -101,7 +101,7 @@ function Register() {
             </button>
           </div>
           {errors.password ? (
-            <div className="text-red-500 text-sm">{errors.password.message?.toString()}</div>
+            <div className="error-text">{errors.password.message?.toString()}</div>
           ) : watch('password') ? (
             <div className="text-green-500 text-sm">درست پر شده</div>
           ) : null}
@@ -125,7 +125,7 @@ function Register() {
             </button>
           </div>
           {errors.confirmPassword ? (
-            <div className="text-red-500 text-sm">{errors.confirmPassword.message?.toString()}</div>
+            <div className="error-text">{errors.confirmPassword.message?.toString()}</div>
           ) : watch('confirmPassword') && watch('confirmPassword') === watch('password') ? (
             <div className="text-green-500 text-sm">درست پر شده</div>
           ) : null}
